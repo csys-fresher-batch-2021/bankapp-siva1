@@ -17,12 +17,12 @@ public class User {
 		//  Auto-generated constructor stub
 	}
 
-	public String name;
-	public String email;
-	public String password;
-	public String address;
-	public long mobileNo;
-	public long accNo;
+	private String name;
+	private String email;
+	private String password;
+	private String address;
+	private long mobileNo;
+	private long accNo;
 	
 
 	public String getName() {

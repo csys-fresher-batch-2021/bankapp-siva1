@@ -13,21 +13,21 @@ public class UserManagement {
 		// Default Constructor
 	}
 
-	public static final List<User> userList = new ArrayList<User>();
+	private static final List<User> userList = new ArrayList<>();
 
 	static {
 		User user1 = new User();
-		user1.accNo = 1234l;
-		user1.name = "Siva";
-		user1.email = "vishvajith257@gmail.com";
-		user1.password = "Siva@123";
+		user1.setAccNo(1234l);
+		user1.setName("Siva");
+		user1.setEmail("vishvajith257@gmail.com");
+		user1.setPassword("Siva@123");
 		userList.add(user1);
 
 		User user2 = new User();
-		user2.accNo = 2345l;
-		user2.name = "Ramesh";
-		user2.email = "gururam12@gmail.com";
-		user2.password = "Gkram@123";
+		user2.setAccNo(2345l);
+		user2.setName("Ramesh");
+		user2.setEmail("gururam12@gmail.com");
+		user2.setPassword("Gkram@123");
 		userList.add(user2);
 	}
 
@@ -36,7 +36,7 @@ public class UserManagement {
 		if (UserValidation.nameValidation(userName) && UserValidation.passwordValidation(userPassword)) {
 
 			for (User validation : userList) {
-				if (validation.name.equalsIgnoreCase(userName) && validation.password.equals(userPassword)) {
+				if (validation.getName().equalsIgnoreCase(userName) && validation.getPassword().equals(userPassword)) {
 
 					valid = true;
 					break;
