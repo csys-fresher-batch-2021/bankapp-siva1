@@ -1,10 +1,18 @@
-package in.siva.app;
+package in.siva.service;
 
 import java.util.List;
+
+import in.siva.model.User;
+import in.siva.validator.UserValidation;
+
 import java.util.ArrayList;
 
 public class UserManagement {
-	
+
+	private UserManagement() {
+		// Default Constructor
+	}
+
 	public static List<User> userList = new ArrayList<User>();
 
 	static {
@@ -21,19 +29,18 @@ public class UserManagement {
 		user2.accNo = 2345l;
 		user2.name = "Ramesh";
 		user2.email = "gururam12@gmail.com";
-		user2.password = "gkram@123";
+		user2.password = "Gkram@123";
 		user2.blockedAcc = false;
 		user2.balance = 50000;
 		userList.add(user2);
 	}
 
 	public static boolean loginValidation(String userName, String userPassword) {
-
 		boolean valid = false;
-		if (Validation.nameValidation(userName) && Validation.passwordValidation(userPassword)) {
+		if (UserValidation.nameValidation(userName) && UserValidation.passwordValidation(userPassword)) {
 
 			for (User validation : userList) {
-				if (validation.name.equals(userName) && validation.password.equals(userPassword)) {
+				if (validation.name.equalsIgnoreCase(userName) && validation.password.equals(userPassword)) {
 
 					valid = true;
 					break;
@@ -41,6 +48,7 @@ public class UserManagement {
 
 			}
 		}
+
 		return valid;
 	}
 
