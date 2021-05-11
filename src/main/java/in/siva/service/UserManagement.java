@@ -21,8 +21,6 @@ public class UserManagement {
 		user1.name = "Siva";
 		user1.email = "vishvajith257@gmail.com";
 		user1.password = "Siva@123";
-		user1.blockedAcc = false;
-		user1.balance = 10000;
 		userList.add(user1);
 
 		User user2 = new User();
@@ -30,8 +28,6 @@ public class UserManagement {
 		user2.name = "Ramesh";
 		user2.email = "gururam12@gmail.com";
 		user2.password = "Gkram@123";
-		user2.blockedAcc = false;
-		user2.balance = 50000;
 		userList.add(user2);
 	}
 

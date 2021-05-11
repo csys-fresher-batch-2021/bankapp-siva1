@@ -11,8 +11,7 @@ public class User {
 		this.address = address;
 		this.mobileNo = mobileNo;
 		this.accNo = accNo;
-		this.balance = balance;
-		this.blockedAcc = blockedAcc;
+		
 	}
 
 	public User() {
@@ -25,8 +24,7 @@ public class User {
 	public String address;
 	public long mobileNo;
 	public long accNo;
-	public double balance;
-	public boolean blockedAcc;
+	
 
 	public String getName() {
 		return name;
@@ -51,11 +49,9 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [name=" + name + ", email=" + email + ", password=" + password + ", address=" + address
-				+ ", mobileNo=" + mobileNo + ", accNo=" + accNo + ", balance=" + balance + ", blockedAcc=" + blockedAcc
-				+ ", getName()=" + getName() + ", getEmail()=" + getEmail() + ", getPassword()=" + getPassword()
+				+ ", mobileNo=" + mobileNo + ", accNo=" + accNo +  ", getName()=" + getName() + ", getEmail()=" + getEmail() + ", getPassword()=" + getPassword()
 				+ ", getAddress()=" + getAddress() + ", getMobileNo()=" + getMobileNo() + ", getAccNo()=" + getAccNo()
-				+ ", getBalance()=" + getBalance() + ", isBlockedAcc()=" + isBlockedAcc() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ",  getClass()=" + getClass()+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
 	public void setPassword(String password) {
@@ -86,20 +82,5 @@ public class User {
 		this.accNo = accNo;
 	}
 
-	public double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-
-	public boolean isBlockedAcc() {
-		return blockedAcc;
-	}
-
-	public void setBlockedAcc(boolean blockedAcc) {
-		this.blockedAcc = blockedAcc;
-	}
-
+	
 }
