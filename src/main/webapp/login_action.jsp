@@ -1,6 +1,6 @@
 <%@page import="in.siva.service.UserManagement"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>Bank APP</title>
 </head>

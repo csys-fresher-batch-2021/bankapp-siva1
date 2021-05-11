@@ -4,6 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserValidation {
+	
+	private UserValidation() {
+		
+	}
 	/**
 	 * To validate the Users Name
 	 * 
@@ -25,7 +29,7 @@ public class UserValidation {
 	}
 
 	/**
-	 * TODO validation for password
+	 * Validation for password
 	 * 
 	 * @param password // password of user
 	 * @return

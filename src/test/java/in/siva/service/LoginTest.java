@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class loginTest {
+public class LoginTest {
 
 	@Test
 	public void correctUsernameAndPassword() {

@@ -2,8 +2,7 @@ package in.siva.model;
 
 public class User {
 
-	public User(String name, String email, String password, String address, long mobileNo, long accNo, double balance,
-			boolean blockedAcc) {
+	public User(String name, String email, String password, String address, long mobileNo, long accNo) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -15,7 +14,7 @@ public class User {
 	}
 
 	public User() {
-		// TODO Auto-generated constructor stub
+		//  Auto-generated constructor stub
 	}
 
 	public String name;
