@@ -1,4 +1,4 @@
-<%@page import="in.siva.app.UserManagement"%>
+<%@page import="in.siva.service.UserManagement"%>
 <html>
 <head>
 <title>Bank APP</title>
@@ -13,7 +13,8 @@
 	String password = request.getParameter("password");
 	boolean valid = UserManagement.loginValidation(username, password);
 	if(valid){
-		out.println("Successfully LoggedIn");
+		String message ="Successfully logged in";
+		response.sendRedirect("login.jsp?infoMessage=" + message);
 	}
 	else{
 	
