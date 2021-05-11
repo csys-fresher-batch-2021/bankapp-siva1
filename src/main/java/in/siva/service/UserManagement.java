@@ -13,7 +13,7 @@ public class UserManagement {
 		// Default Constructor
 	}
 
-	public static List<User> userList = new ArrayList<User>();
+	public static final List<User> userList = new ArrayList<User>();
 
 	static {
 		User user1 = new User();
