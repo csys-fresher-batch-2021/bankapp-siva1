@@ -8,17 +8,17 @@
 	<main class="container-fluid">
 		<%
 		String errorMessage = request.getParameter("errorMessage");
-		if(errorMessage != null){
+		if (errorMessage != null) {
 			out.println("<font color='red'>" + errorMessage + "</font>");
 		}
 		String infoMessage = request.getParameter("infoMessage");
-		if(infoMessage != null){
+		if (infoMessage != null) {
 			out.println("<font color='green'>" + infoMessage + "</font>");
 		}
 		%>
-	
-		
-		
+
+
+
 	</main>
 </body>
 </html>

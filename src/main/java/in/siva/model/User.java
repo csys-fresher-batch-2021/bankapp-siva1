@@ -10,11 +10,11 @@ public class User {
 		this.address = address;
 		this.mobileNo = mobileNo;
 		this.accNo = accNo;
-		
+
 	}
 
 	public User() {
-		//  Auto-generated constructor stub
+		// Auto-generated constructor stub
 	}
 
 	private String name;
@@ -23,7 +23,6 @@ public class User {
 	private String address;
 	private long mobileNo;
 	private long accNo;
-	
 
 	public String getName() {
 		return name;
@@ -48,9 +47,10 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [name=" + name + ", email=" + email + ", password=" + password + ", address=" + address
-				+ ", mobileNo=" + mobileNo + ", accNo=" + accNo +  ", getName()=" + getName() + ", getEmail()=" + getEmail() + ", getPassword()=" + getPassword()
-				+ ", getAddress()=" + getAddress() + ", getMobileNo()=" + getMobileNo() + ", getAccNo()=" + getAccNo()
-				+ ",  getClass()=" + getClass()+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", mobileNo=" + mobileNo + ", accNo=" + accNo + ", getName()=" + getName() + ", getEmail()="
+				+ getEmail() + ", getPassword()=" + getPassword() + ", getAddress()=" + getAddress()
+				+ ", getMobileNo()=" + getMobileNo() + ", getAccNo()=" + getAccNo() + ",  getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
 	public void setPassword(String password) {
@@ -81,5 +81,4 @@ public class User {
 		this.accNo = accNo;
 	}
 
-	
 }
