@@ -22,7 +22,7 @@ public class UserValidation {
 		String regx = "^\\w{4,10}$";
 
 		if (name != null) {
-			Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);
+			Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);// Compiles the given pattern
 			Matcher matcher = pattern.matcher(name);// Matches the pattern with the name
 			valid = matcher.find();
 		}
@@ -45,7 +45,7 @@ public class UserValidation {
 		String check = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
 		if (password != null) {
 
-			Pattern passwordPattern = Pattern.compile(check);
+			Pattern passwordPattern = Pattern.compile(check);// Compiles the given regex pattern
 			Matcher passwordMatcher = passwordPattern.matcher(password);// Matches the given pattern with the password
 			valid = passwordMatcher.matches();
 

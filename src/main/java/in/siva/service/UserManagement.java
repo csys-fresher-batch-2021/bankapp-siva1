@@ -13,8 +13,8 @@ public class UserManagement {
 		// Default Constructor
 	}
 
-	private static final List<User> userList = new ArrayList<>();
-
+	private static final List<User> userList = new ArrayList<>();// created ArrayList
+	// Details of user
 	static {
 		User user1 = new User();
 		user1.setAccNo(1234l);
@@ -31,11 +31,21 @@ public class UserManagement {
 		userList.add(user2);
 	}
 
+	/**
+	 * Validation for Login
+	 * 
+	 * @param userName     // name of the user
+	 * @param userPassword //password given by the user
+	 * @return
+	 */
+
 	public static boolean loginValidation(String userName, String userPassword) {
 		boolean valid = false;
+		// Condition for name and password validation
 		if (UserValidation.nameValidation(userName) && UserValidation.passwordValidation(userPassword)) {
 
 			for (User validation : userList) {
+				// condition for matching the given name and password
 				if (validation.getName().equalsIgnoreCase(userName) && validation.getPassword().equals(userPassword)) {
 
 					valid = true;
@@ -48,4 +58,5 @@ public class UserManagement {
 		return valid;
 	}
 
+	
 }

@@ -31,8 +31,8 @@ public class LoginServlet extends HttpServlet {
 		
 		String username = request.getParameter("name");
 		String password = request.getParameter("password");
-		boolean valid = UserManagement.loginValidation(username, password);
-		
+		boolean valid = UserManagement.loginValidation(username, password);//Validating the UserName and Password
+		//Condition for valid Login
 		if (valid) {
 			String message = "Successfully logged in";
 			response.sendRedirect("login.jsp?infoMessage=" + message);

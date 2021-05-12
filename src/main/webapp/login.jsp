@@ -18,7 +18,7 @@
 			 
 			<input type="password" name="password"id="password" placeholder="Enter Your Password" required><br />
 			
-			<button class="btn btn-primary">Submit</button>
+			<button class="btn btn-primary">Submit</button> 
 			
 		</form>
 
