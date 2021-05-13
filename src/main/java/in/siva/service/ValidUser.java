@@ -4,6 +4,11 @@ import in.siva.model.User;
 import in.siva.validator.UserValidation;
 
 public class ValidUser {
+	
+	
+	private ValidUser() {
+		//Default Constructor
+	}
 	/**
 	 * Validation for user details
 	 * 
