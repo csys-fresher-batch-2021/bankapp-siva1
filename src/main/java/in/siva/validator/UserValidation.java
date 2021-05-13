@@ -52,4 +52,63 @@ public class UserValidation {
 		}
 		return valid;
 	}
+
+	/**
+	 * To validate the Users Email
+	 * 
+	 * @param email //Mail Id
+	 * @return
+	 */
+	public static boolean emailValidation(String email) {
+
+		boolean valid = false;
+		// Email Pattern declaration
+		String check = "\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b";
+		// Business Logic
+		if (email != null) {
+
+			Pattern patternForEmail = Pattern.compile(check);// Compiles the given pattern
+			Matcher matcherForEmail = patternForEmail.matcher(email);// Matches the pattern with the Email
+			valid = matcherForEmail.matches();
+		}
+		return valid;
+	}
+
+	/**
+	 * To validate mobile number of the user
+	 * 
+	 * @param mobileNo //mobile number given by the user
+	 * @return
+	 */
+	public static boolean mobileNumberValidation(long mobileNo) {
+		String mobile = Long.toString(mobileNo);
+		boolean valid = false;
+		String check = "^\\d{10}$";
+		if (mobile != null) {
+			Pattern numberPattern = Pattern.compile(check);// Compiles the given pattern
+			Matcher numberMatcher = numberPattern.matcher(mobile); // Matches the given pattern with mobile no
+			valid = numberMatcher.matches();
+		}
+		return valid;
+	}
+
+	/**
+	 * To validate the bank account number
+	 * 
+	 * @param accountNo // account number of the user
+	 * @return
+	 */
+	public static boolean accountNumberValidation(long accountNo) {
+		String accNo = Long.toString(accountNo);
+		boolean valid = false;
+		String check = "[0-9]{9,18}";
+		if (accNo != null) {
+			Pattern accPattern = Pattern.compile(check); // compiles the given pattern
+			Matcher accMatcher = accPattern.matcher(accNo); // matches the given pattern with the account number
+			valid = accMatcher.matches();
+
+		}
+		return valid;
+	}
+
 }

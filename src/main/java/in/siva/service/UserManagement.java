@@ -58,5 +58,22 @@ public class UserManagement {
 		return valid;
 	}
 
+/**
+	 * Register with user details Add the user Details in ArrayList
+	 * 
+	 * @param list //Details of user
+	 */
+	public static boolean registerDetails(User user) {
+		boolean register = false;
+		// Condition for valid details
+		if (ValidUser.isValidUser(user)) {
+			userList.add(user);
+			register = true;
+		}
+		return register;
+
+	}
+
+
 	
 }

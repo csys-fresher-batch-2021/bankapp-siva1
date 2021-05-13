@@ -9,7 +9,7 @@
 
 		<h3>Login Page</h3>
 
-		<form action="LoginServlet" method="get">
+		<form action="LoginServlet" method="post">
 			<label>UserName</label>
 			
 			<input type="text" name="name" id="name"placeholder="Enter Your Registered Name" required autofocus><br />
