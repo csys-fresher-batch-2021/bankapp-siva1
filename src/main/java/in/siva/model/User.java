@@ -1,7 +1,7 @@
 package in.siva.model;
 
 public class User {
-	public User(String name, String email, String password, String address, long mobileNo, long accNo) {
+	public User(String name, String email, String password, String address, long mobileNo, long accNo,float balance) {
 		super();
 		this.name = name;
 		this.email = email;
