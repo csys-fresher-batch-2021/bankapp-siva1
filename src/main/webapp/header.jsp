@@ -35,11 +35,19 @@ String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");%>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="registration.jsp">Register</a>
+
       </li>
       <%} else { %>
         <li class="nav-item">
         <a class="nav-link" href="#">Welcome <%=loggedInUsername %></a>
       </li>
+
+      </li>
+      <%} else { %>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Welcome <%=loggedInUsername %></a>
+      </li>
+
         <li class="nav-item">
         <a class="nav-link" href="LogoutServlet">Logout</a>
       </li>

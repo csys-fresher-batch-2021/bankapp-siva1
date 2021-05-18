@@ -8,7 +8,7 @@ import in.siva.model.User;
 public class UserValidation {
 
 	private UserValidation() {
-		// Default constructor
+
 	}
 
 	/**
@@ -93,6 +93,7 @@ public class UserValidation {
 		}
 		return valid;
 	}
+
 	
 	public static boolean isValidInitialAmount(float amount) {
 		boolean valid=false;
@@ -119,5 +120,26 @@ public static boolean isValidUser(User user)
 	
 
 }
+
+
+	/**
+	 * To validate the bank account number
+	 * 
+	 * @param accountNo // account number of the user
+	 * @return
+	 */
+	public static boolean accountNumberValidation(long accountNo) {
+		String accNo = Long.toString(accountNo);
+		boolean valid = false;
+		String check = "[0-9]{9,18}";
+		if (accNo != null) {
+			Pattern accPattern = Pattern.compile(check); // compiles the given pattern
+			Matcher accMatcher = accPattern.matcher(accNo); // matches the given pattern with the account number
+			valid = accMatcher.matches();
+
+		}
+		return valid;
+	}
+
 
 }

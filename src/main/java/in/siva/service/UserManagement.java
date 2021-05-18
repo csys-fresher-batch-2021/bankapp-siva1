@@ -34,6 +34,19 @@ public class UserManagement {
 		user2.setAddress("Chennai");
 		user2.setMobileNo(9361363167l);
 		user2.setBalance(25000);
+
+		user1.setAccNo(1234l);
+		user1.setName("Siva");
+		user1.setEmail("vishvajith257@gmail.com");
+		user1.setPassword("Siva@123");
+		userList.add(user1);
+
+		User user2 = new User();
+		user2.setAccNo(2345l);
+		user2.setName("Ramesh");
+		user2.setEmail("gururam12@gmail.com");
+		user2.setPassword("Gkram@123");
+
 		userList.add(user2);
 	}
 
@@ -64,7 +77,8 @@ public class UserManagement {
 		return valid;
 	}
 
-	/**
+
+/**
 	 * Register with user details Add the user Details in ArrayList
 	 * 
 	 * @param list //Details of user
@@ -72,6 +86,7 @@ public class UserManagement {
 	public static boolean registerDetails(User user) {
 		boolean register = false;
 		// Condition for valid details
+
 		if (UserValidation.isValidUser(user)) {
 
 			int id = userList.size() + 1000001;
