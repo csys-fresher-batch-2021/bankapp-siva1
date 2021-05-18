@@ -21,10 +21,8 @@
 		<%
 		String userName = (String)session.getAttribute("LOGGED_IN_USER");
 		List<User> userList = UserManagement.getAllUser(userName);
-		//User user = userList.get(0);
+		User user = userList.get(0);
 		 
-		for(User user: userList){
-		if (userName.equals(user.getName())){  
 		%>
 		
 		<tbody>
@@ -49,7 +47,7 @@
 		<td><%=user.getBalance() %></td>
 		</tr>
 		
-	 	  <% }} %>  
+	 	  
 		</tbody>
 		
 		
@@ -57,9 +55,8 @@
 		
 		
 		</table>
-		<a href="#" class="btn btn-primary">Deposit</a>
-		<a href="#" class="btn btn-primary">Withdraw</a> 
-		<a href="#" class="btn btn-primary">Transfer</a>    
+		<a href="deposit.jsp" class="btn btn-primary">Deposit</a>
+	    
 		</form>
 		
 		

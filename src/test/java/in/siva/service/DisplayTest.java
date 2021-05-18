@@ -16,7 +16,7 @@ public class DisplayTest {
 	public void displayUserDetails() {
 		String name = "Ramesh";
 		UserManagement.getAllUser(name);
-		int size = UserManagement.getAllUser(name).size();
+		int size = UserManagement.getList().size();
 
 		assertEquals(3,size);
 

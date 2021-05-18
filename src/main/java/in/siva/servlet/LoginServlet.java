@@ -1,7 +1,6 @@
 package in.siva.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +25,6 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		out.println("LoginServlet");
 
 		String username = request.getParameter("name");
 		String password = request.getParameter("password");
@@ -48,4 +45,3 @@ public class LoginServlet extends HttpServlet {
 	}
 
 }
-
