@@ -94,52 +94,38 @@ public class UserValidation {
 		return valid;
 	}
 
-	
-	public static boolean isValidInitialAmount(float amount) {
-		boolean valid=false;
-		if(amount>0) {
-			valid=true;
-		}
-		return valid;
-	}
-
-
-public static boolean isValidUser(User user)
-{
-	boolean valid=false;
-	boolean validEmail = UserValidation.emailValidation(user.getEmail());
-	boolean validMobile = UserValidation.mobileNumberValidation(user.getMobileNo());
-	boolean validName = UserValidation.nameValidation(user.getName());
-	boolean validPass = UserValidation.passwordValidation(user.getPassword());
-	boolean validAmount = UserValidation.isValidInitialAmount(user.getBalance());
-	if(validAmount&&validEmail&&validName&&validMobile&&validPass)
-	{
-		valid=true;
-	}
-	return valid;
-	
-
-}
-
-
 	/**
-	 * To validate the bank account number
+	 * TO validate initial amount deposit by user
 	 * 
-	 * @param accountNo // account number of the user
+	 * @param amount
 	 * @return
 	 */
-	public static boolean accountNumberValidation(long accountNo) {
-		String accNo = Long.toString(accountNo);
+	public static boolean isValidInitialAmount(float amount) {
 		boolean valid = false;
-		String check = "[0-9]{9,18}";
-		if (accNo != null) {
-			Pattern accPattern = Pattern.compile(check); // compiles the given pattern
-			Matcher accMatcher = accPattern.matcher(accNo); // matches the given pattern with the account number
-			valid = accMatcher.matches();
-
+		if (amount > 0) {
+			valid = true;
 		}
 		return valid;
 	}
 
+	/**
+	 * To validate user details
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public static boolean isValidUser(User user) {
+		boolean valid = false;
+		boolean validEmail = UserValidation.emailValidation(user.getEmail());
+		boolean validMobile = UserValidation.mobileNumberValidation(user.getMobileNo());
+		boolean validName = UserValidation.nameValidation(user.getName());
+		boolean validPass = UserValidation.passwordValidation(user.getPassword());
+		boolean validAmount = UserValidation.isValidInitialAmount(user.getBalance());
+		if (validAmount && validEmail && validName && validMobile && validPass) {
+			valid = true;
+		}
+		return valid;
+
+	}
 
 }

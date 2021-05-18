@@ -17,11 +17,7 @@ public class RegistrationTest {
 		user.setName("siva");
 		user.setPassword("Siva@1234");
 		user.setMobileNo(9361363167l);
-
 		user.setBalance(1000);
-
-		user.setAccNo(98249824897l);
-
 		user.setEmail("siva123@gmail.com");
 
 	}
