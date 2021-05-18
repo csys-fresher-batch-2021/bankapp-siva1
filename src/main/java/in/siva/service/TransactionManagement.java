@@ -4,6 +4,10 @@ import in.siva.model.User;
 
 public class TransactionManagement {
 
+	private TransactionManagement() {
+		// Default Constructor
+	}
+
 	/**
 	 * Deposit an Amount for User account
 	 * 
@@ -20,7 +24,7 @@ public class TransactionManagement {
 				if (deposit.getName().equals(name)) {
 
 					balance = amount + deposit.getBalance();// deposit calculation
-					// balance = deposit.getBalance();
+
 					break;
 				}
 

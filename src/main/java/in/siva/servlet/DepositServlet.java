@@ -22,9 +22,10 @@ public class DepositServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// PrintWriter out = response. getWriter();
+
 		float amount = Float.parseFloat(request.getParameter("amount"));
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("LOGGED_IN_USER");
