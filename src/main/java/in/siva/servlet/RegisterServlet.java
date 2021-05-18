@@ -28,14 +28,25 @@ public class RegisterServlet extends HttpServlet {
 		String name = request.getParameter("username");
 		String password = request.getParameter("userpassword");
 		Long mobile = Long.parseLong(request.getParameter("number"));
+
+		String address = request.getParameter("address");
 		String email = request.getParameter("email");
+		float amount = Float.parseFloat(request.getParameter("amount"));
 		Long accno = Long.parseLong(request.getParameter("accno"));
+
 		User user = new User();
 		user.setName(name);
 		user.setPassword(password);
 		user.setMobileNo(mobile);
+
+		user.setAddress(address);
+		user.setBalance(amount);
+		user.setEmail(email);
+		try {
+
 		user.setAccNo(accno);
 		user.setEmail(email);
+
 		boolean valid = UserManagement.registerDetails(user);// validating the details
 		// condition for valid details
 		if (valid) {
@@ -45,6 +56,16 @@ public class RegisterServlet extends HttpServlet {
 		} else {
 			String message = "!!Invalid Login Credentials!!";
 			response.sendRedirect("registration.jsp?errorMessage=" + message);
+
+		}
+    }
+		catch (Exception e) {
+			String message = "!!Invalid Login Credentials!!";
+			response.sendRedirect("registration.jsp?errorMessage=" + message);
 		}
 	}
+
+
 }
+
+

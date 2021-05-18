@@ -34,10 +34,10 @@ public class LoginServlet extends HttpServlet {
 		boolean valid = UserManagement.loginValidation(username, password);// Validating the UserName and Password
 		// Condition for valid Login
 		if (valid) {
-			HttpSession session = request.getSession();
-			session.setAttribute("LOGGED_IN_USER", username);
+			HttpSession session = request.getSession(); // Creating a Session
+			session.setAttribute("LOGGED_IN_USER", username); // Setting username in session
 			String message = "Successfully logged in";
-			response.sendRedirect("index.jsp?infoMessage=" + message);
+			response.sendRedirect("display.jsp?infoMessage=" + message);
 
 		} else {
 
@@ -48,3 +48,4 @@ public class LoginServlet extends HttpServlet {
 	}
 
 }
+

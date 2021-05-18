@@ -17,7 +17,7 @@ public class RegistrationTest {
 		user.setName("siva");
 		user.setPassword("Siva@1234");
 		user.setMobileNo(9361363167l);
-		user.setAccNo(98249824897l);
+		user.setBalance(1000);
 		user.setEmail("siva123@gmail.com");
 
 	}
@@ -72,9 +72,10 @@ public class RegistrationTest {
 	 * Test case for invalid account number
 	 */
 	@Test
-	public void isInvalidAccountNumber() {
+	public void isInvalidInitialAmount() {
 
-		user.setAccNo(84566l);
+		user.setBalance(-2000);
+
 		boolean valid = UserManagement.registerDetails(user);
 		assertFalse(valid);
 

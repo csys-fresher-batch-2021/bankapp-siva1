@@ -2,7 +2,8 @@ package in.siva.model;
 
 public class User {
 
-	public User(String name, String email, String password, String address, long mobileNo, long accNo) {
+	public User(String name, String email, String password, String address, long mobileNo, long accNo,float balance) {
+
 		super();
 		this.name = name;
 		this.email = email;
@@ -10,7 +11,7 @@ public class User {
 		this.address = address;
 		this.mobileNo = mobileNo;
 		this.accNo = accNo;
-
+		this.balance = balance;
 	}
 
 	public User() {
@@ -23,6 +24,8 @@ public class User {
 	private String address;
 	private long mobileNo;
 	private long accNo;
+
+	private float balance;
 
 	public String getName() {
 		return name;
@@ -79,6 +82,14 @@ public class User {
 
 	public void setAccNo(long accNo) {
 		this.accNo = accNo;
+	}
+
+	public float getBalance() {
+		return balance;
+	}
+
+	public void setBalance(float balance) {
+		this.balance = balance;
 	}
 
 }
