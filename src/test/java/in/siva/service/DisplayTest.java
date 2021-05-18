@@ -2,8 +2,10 @@ package in.siva.service;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.Test;
 
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DisplayTest {
 
 	/**
@@ -14,7 +16,7 @@ public class DisplayTest {
 	public void displayUserDetails() {
 		String name = "Ramesh";
 		UserManagement.getAllUser(name);
-		int size = UserManagement.getList().size();
+		int size = UserManagement.getAllUser(name).size();
 
 		assertEquals(size, 2);
 
