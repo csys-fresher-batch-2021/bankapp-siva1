@@ -101,11 +101,11 @@ public class UserManagement {
 	 * @return
 	 */
 	public static List<User> getAllUser(String name) {
-		// List<User> search = new ArrayList<>();
+		
 		if (UserValidation.nameValidation(name)) {
 			for (User display : userList) {
 				if (display.getName().equalsIgnoreCase(name)) {
-					// search.add(display);
+					
 					break;
 				}
 			}

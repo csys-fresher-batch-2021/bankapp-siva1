@@ -1,7 +1,8 @@
 <%@page import="in.siva.model.User"%>
 <%@page import="java.util.List"%>
 <%@page import="in.siva.service.UserManagement"%>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Bank APP</title>
 </head>
@@ -13,7 +14,7 @@
 		<table class="table	table-bordered">
 		<caption>Users bank account details</caption>
 		<thead><tr>
-		<!-- <th scope="col">S.no</th> -->
+		
 		<th scope="col">Type</th>
 		<th scope="col">Details</th>
 		
@@ -47,8 +48,6 @@
 		<tr><td>Balance</td>
 		<td><%=user.getBalance() %></td>
 		</tr>
-		<!-- <tr><td>Balance</td><td>50000</td></tr>
-	 -->
 		
 	 	  <% }} %>  
 		</tbody>
