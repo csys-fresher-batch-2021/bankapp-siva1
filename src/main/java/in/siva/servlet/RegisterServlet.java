@@ -6,8 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import in.siva.exception.ValidException;
 import in.siva.model.User;
 import in.siva.service.UserManagement;
 
@@ -32,7 +32,6 @@ public class RegisterServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		String email = request.getParameter("email");
 		float amount = Float.parseFloat(request.getParameter("amount"));
-		
 
 		User user = new User();
 		user.setName(name);
@@ -43,26 +42,22 @@ public class RegisterServlet extends HttpServlet {
 		user.setEmail(email);
 		try {
 
-		boolean valid = UserManagement.registerDetails(user);// validating the details
-		// condition for valid details
-		if (valid) {
-			
-			String message = "Successfully Registered";
-			response.sendRedirect("login.jsp?infoMessage=" + message);
+			boolean valid = UserManagement.registerDetails(user);// validating the details
+			// condition for valid details
+			if (valid) {
 
-		} else {
-			String message = "!!Invalid Login Credentials!!";
-			response.sendRedirect("registration.jsp?errorMessage=" + message);
+				String message = "Successfully Registered";
+				response.sendRedirect("login.jsp?infoMessage=" + message);
 
-		}
-    }
-		catch (Exception e) {
+			} else {
+				String message = "!!Invalid Login Credentials!!";
+				response.sendRedirect("registration.jsp?errorMessage=" + message);
+
+			}
+		} catch (ValidException e) {
 			String message = "!!Invalid Login Credentials!!";
 			response.sendRedirect("registration.jsp?errorMessage=" + message);
 		}
 	}
 
-
 }
-
-

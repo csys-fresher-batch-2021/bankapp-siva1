@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import in.siva.exception.ValidException;
 import in.siva.service.TransactionManagement;
 
 /**
@@ -21,11 +22,14 @@ public class WithdrawServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		float amount = Float.parseFloat(request.getParameter("amount"));
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("LOGGED_IN_USER");
+		
+		try {
 		double balance = TransactionManagement.withdrawAmount(email, amount);
 
 		if (balance != 0) {
@@ -36,6 +40,9 @@ public class WithdrawServlet extends HttpServlet {
 			String message = "Withdrawal failed";
 			response.sendRedirect("withdraw.jsp?errormessage=" + message);
 		}
+	} catch (ValidException e) {
+		String message = "Withdrawal failed";
+		response.sendRedirect("withdraw.jsp?errormessage=" + message);
 	}
 
-}
+}}

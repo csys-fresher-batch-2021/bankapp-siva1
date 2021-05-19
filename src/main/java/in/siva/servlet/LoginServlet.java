@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		
+
 		boolean valid = UserManagement.loginValidation(email, password);// Validating the UserName and Password
 		// Condition for valid Login
 		if (valid) {

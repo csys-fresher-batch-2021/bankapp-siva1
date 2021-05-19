@@ -40,7 +40,7 @@
 			<input type="radio" name="gender" id="gender" value="M">Male
 			<input type="radio" name="gender" id="gender" value="F">Female <br />
 
-			<p><b>Deposit an Initial Amount at least "Rs.1000" to Open Your new SB Account</b></p>
+			<p><strong>Deposit an Initial Amount at least "Rs.1000" to Open Your new SB Account</strong></p>
 			<div class="mb-2 col-4">
 			<label>Initial Amount</label>
 			<input type="number" name="amount" id="amount" min="1000" required class="form-control" placeholder="Enter Initial Amount"><br />

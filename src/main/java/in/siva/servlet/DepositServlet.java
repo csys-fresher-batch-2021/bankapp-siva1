@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import in.siva.exception.ValidException;
 import in.siva.service.TransactionManagement;
 
 /**
@@ -29,15 +30,21 @@ public class DepositServlet extends HttpServlet {
 		float amount = Float.parseFloat(request.getParameter("amount"));
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("LOGGED_IN_USER");
-		double balance = TransactionManagement.depositAmount(email, amount);
+		try {
+			double balance = TransactionManagement.depositAmount(email, amount);
 
-		if (balance != 0) {
+			if (balance != 0) {
 
-			String message = "Deposit Success ";
-			response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
-		} else {
+				String message = "Deposit Success ";
+				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
+			} else {
+				String message = "Deposit failed";
+				response.sendRedirect("deposit.jsp?errormessage=" + message);
+			}
+		} catch (ValidException e) {
 			String message = "Deposit failed";
 			response.sendRedirect("deposit.jsp?errormessage=" + message);
+
 		}
 	}
 }

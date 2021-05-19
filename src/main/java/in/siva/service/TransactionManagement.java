@@ -19,14 +19,16 @@ public class TransactionManagement {
 
 	public static double depositAmount(String email, float amount) {
 		double balance = 0;
+
+		// condition to validate email and amount
 		if (UserValidation.emailValidation(email) && UserValidation.isValidAmount(amount)) {
 			balance = UserManagementDAO.deposit(email, amount);
 		}
-		
-		else
-		{
+
+		else {
 			throw new ValidException("Enter a valid amount");
-		}return balance;
+		}
+		return balance;
 	}
 
 	/**
@@ -39,10 +41,10 @@ public class TransactionManagement {
 
 	public static double withdrawAmount(String email, float amount) {
 		double balance = 0;
+		// condition to validate email and amount
 		if (UserValidation.emailValidation(email) && UserValidation.isValidAmount(amount)) {
 			balance = UserManagementDAO.withdraw(email, amount);
-		}
-		else {
+		} else {
 			throw new ValidException("Enter a valid amount");
 		}
 		return balance;

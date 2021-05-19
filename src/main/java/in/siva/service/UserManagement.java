@@ -57,9 +57,7 @@ public class UserManagement {
 		// Condition for valid email
 		if (UserValidation.emailValidation(email)) {
 			display = UserManagementDAO.getUsers(email);
-		}
-		else
-		{
+		} else {
 			throw new ValidException("Enter Your Correct Account Name");
 		}
 		return display;
