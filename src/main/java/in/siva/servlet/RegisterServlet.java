@@ -1,7 +1,7 @@
 package in.siva.servlet;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
 				try {
 					response.sendRedirect("login.jsp?infoMessage=" + message);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					//  Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -59,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
 				try {
 					response.sendRedirect("registration.jsp?errorMessage=" + message);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					//  Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -69,7 +69,7 @@ public class RegisterServlet extends HttpServlet {
 			try {
 				response.sendRedirect("registration.jsp?errorMessage=" + message);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				//  Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
