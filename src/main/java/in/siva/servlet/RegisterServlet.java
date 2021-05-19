@@ -1,7 +1,7 @@
 package in.siva.servlet;
 
 import java.io.IOException;
-
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +24,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			 {
+			throws ServletException, IOException {
 
 		String name = request.getParameter("username");
 		String password = request.getParameter("userpassword");
@@ -47,31 +47,16 @@ public class RegisterServlet extends HttpServlet {
 			if (valid) {
 
 				String message = "Successfully Registered";
-				try {
-					response.sendRedirect("login.jsp?infoMessage=" + message);
-				} catch (IOException e) {
-					//  Auto-generated catch block
-					e.printStackTrace();
-				}
+				response.sendRedirect("login.jsp?infoMessage=" + message);
 
 			} else {
 				String message = "!!Invalid Login Credentials!!";
-				try {
-					response.sendRedirect("registration.jsp?errorMessage=" + message);
-				} catch (IOException e) {
-					//  Auto-generated catch block
-					e.printStackTrace();
-				}
+				response.sendRedirect("registration.jsp?errorMessage=" + message);
 
 			}
 		} catch (ValidException e) {
 			String message = "!!Invalid Login Credentials!!";
-			try {
-				response.sendRedirect("registration.jsp?errorMessage=" + message);
-			} catch (IOException e1) {
-				//  Auto-generated catch block
-				e1.printStackTrace();
-			}
+			response.sendRedirect("registration.jsp?errorMessage=" + message);
 		}
 	}
 
