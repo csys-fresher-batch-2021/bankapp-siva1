@@ -24,7 +24,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			 {
 
 		String name = request.getParameter("username");
 		String password = request.getParameter("userpassword");
@@ -47,16 +47,31 @@ public class RegisterServlet extends HttpServlet {
 			if (valid) {
 
 				String message = "Successfully Registered";
-				response.sendRedirect("login.jsp?infoMessage=" + message);
+				try {
+					response.sendRedirect("login.jsp?infoMessage=" + message);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			} else {
 				String message = "!!Invalid Login Credentials!!";
-				response.sendRedirect("registration.jsp?errorMessage=" + message);
+				try {
+					response.sendRedirect("registration.jsp?errorMessage=" + message);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		} catch (ValidException e) {
 			String message = "!!Invalid Login Credentials!!";
-			response.sendRedirect("registration.jsp?errorMessage=" + message);
+			try {
+				response.sendRedirect("registration.jsp?errorMessage=" + message);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 

@@ -19,7 +19,7 @@
 	<div class="mb-2 col-4">
 		 	<label>Mobile</label>
 			<input type="number" id="number" name="number" placeholder="Enter Mobile Number" class="form-control" required min="1000000000"max="9999999999"><br />
-			<div class="invalid-feedback">Please Enter a MailId.</div>
+			<div class="invalid-feedback">Please Enter a MobileNumber.</div>
 			</div>
 			<div class="mb-2 col-4">
 			<label>Address</label> 

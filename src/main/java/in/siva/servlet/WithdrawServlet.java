@@ -24,7 +24,7 @@ public class WithdrawServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			 {
 		float amount = Float.parseFloat(request.getParameter("amount"));
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("LOGGED_IN_USER");
@@ -35,14 +35,29 @@ public class WithdrawServlet extends HttpServlet {
 		if (balance != 0) {
 
 			String message = "Withdraw Success ";
-			response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
+			try {
+				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			String message = "Withdrawal failed";
-			response.sendRedirect("withdraw.jsp?errormessage=" + message);
+			try {
+				response.sendRedirect("withdraw.jsp?errormessage=" + message);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	} catch (ValidException e) {
 		String message = "Withdrawal failed";
-		response.sendRedirect("withdraw.jsp?errormessage=" + message);
+		try {
+			response.sendRedirect("withdraw.jsp?errormessage=" + message);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 }}

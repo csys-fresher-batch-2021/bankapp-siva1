@@ -24,8 +24,8 @@ public class DepositServlet extends HttpServlet {
 	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+			
 
 		float amount = Float.parseFloat(request.getParameter("amount"));
 		HttpSession session = request.getSession();
@@ -43,8 +43,16 @@ public class DepositServlet extends HttpServlet {
 			}
 		} catch (ValidException e) {
 			String message = "Deposit failed";
-			response.sendRedirect("deposit.jsp?errormessage=" + message);
+			try {
+				response.sendRedirect("deposit.jsp?errormessage=" + message);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
