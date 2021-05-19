@@ -1,6 +1,8 @@
 package in.siva.service;
 
-import in.siva.model.User;
+import in.siva.dao.UserManagementDAO;
+import in.siva.exception.ValidException;
+import in.siva.validator.UserValidation;
 
 public class TransactionManagement {
 
@@ -11,30 +13,38 @@ public class TransactionManagement {
 	/**
 	 * Deposit an Amount for User account
 	 * 
-	 * @param user   // details of user
+	 * @param name   // name of user
 	 * @param amount // amount to deposit
 	 */
 
-	public static double depositAmount(String name, double amount) {
+	public static double depositAmount(String email, float amount) {
 		double balance = 0;
+		if (UserValidation.emailValidation(email) && UserValidation.isValidAmount(amount)) {
+			balance = UserManagementDAO.deposit(email, amount);
+		}
+		
+		else
+		{
+			throw new ValidException("Enter a valid amount");
+		}return balance;
+	}
 
-		if (amount != 0 && amount > 0) {
-			for (User deposit : UserManagement.getAllUser(name)) {
+	/**
+	 * Withdraw money from account
+	 * 
+	 * @param name   // name of user
+	 * @param amount // amount withdraw by user
+	 * @return
+	 */
 
-				if (deposit.getName().equals(name)) {
-
-					balance = amount + deposit.getBalance();// deposit calculation
-
-					break;
-				}
-
-			}
-		} else {
-
-			throw new RuntimeException("Enter a valid amount");
-
+	public static double withdrawAmount(String email, float amount) {
+		double balance = 0;
+		if (UserValidation.emailValidation(email) && UserValidation.isValidAmount(amount)) {
+			balance = UserManagementDAO.withdraw(email, amount);
+		}
+		else {
+			throw new ValidException("Enter a valid amount");
 		}
 		return balance;
 	}
-
 }

@@ -100,7 +100,7 @@ public class UserValidation {
 	 * @param amount
 	 * @return
 	 */
-	public static boolean isValidInitialAmount(float amount) {
+	public static boolean isValidAmount(float amount) {
 		boolean valid = false;
 		if (amount > 0) {
 			valid = true;
@@ -120,7 +120,7 @@ public class UserValidation {
 		boolean validMobile = UserValidation.mobileNumberValidation(user.getMobileNo());
 		boolean validName = UserValidation.nameValidation(user.getName());
 		boolean validPass = UserValidation.passwordValidation(user.getPassword());
-		boolean validAmount = UserValidation.isValidInitialAmount(user.getBalance());
+		boolean validAmount = UserValidation.isValidAmount(user.getBalance());
 		if (validAmount && validEmail && validName && validMobile && validPass) {
 			valid = true;
 		}

@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import in.siva.model.User;
 import in.siva.service.UserManagement;
@@ -45,6 +46,7 @@ public class RegisterServlet extends HttpServlet {
 		boolean valid = UserManagement.registerDetails(user);// validating the details
 		// condition for valid details
 		if (valid) {
+			
 			String message = "Successfully Registered";
 			response.sendRedirect("login.jsp?infoMessage=" + message);
 
