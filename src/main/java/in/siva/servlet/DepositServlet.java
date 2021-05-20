@@ -32,27 +32,24 @@ public class DepositServlet extends HttpServlet {
 			String price = request.getParameter("amount");
 			HttpSession session = request.getSession();
 			String email = (String) session.getAttribute("LOGGED_IN_USER");
-			float amount =0;
-			try {
-				amount = NumberValidator.parseFloat(price, "Invalid amount");
-				double balance = TransactionManagement.depositAmount(email, amount);
+			float amount = 0;
 
-				if (balance != 0) {
+			amount = NumberValidator.parseFloat(price, "Invalid amount");
+			double balance = TransactionManagement.depositAmount(email, amount);
 
-					String message = "Deposit Success ";
-					response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
-				} else {
-					String message = "Deposit failed";
-					response.sendRedirect("deposit.jsp?errormessage=" + message);
-				}
-			} catch (ValidException e) {
+			if (balance != 0) {
+
+				String message = "Deposit Success ";
+				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
+			} else {
 				String message = "Deposit failed";
 				response.sendRedirect("deposit.jsp?errormessage=" + message);
-
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ValidException | IOException e) {
+			String message = "Deposit failed";
+			response.sendRedirect("deposit.jsp?errormessage=" + message);
+
 		}
+
 	}
 }

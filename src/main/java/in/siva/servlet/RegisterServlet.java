@@ -41,31 +41,24 @@ public class RegisterServlet extends HttpServlet {
 			user.setAddress(address);
 			user.setBalance(amount);
 			user.setEmail(email);
-			try {
 
-				boolean valid = UserManagement.registerDetails(user);// validating the details
-				// condition for valid details
-				if (valid) {
+			boolean valid = UserManagement.registerDetails(user);// validating the details
+			// condition for valid details
+			if (valid) {
 
-					String message = "Successfully Registered";
-					response.sendRedirect("login.jsp?infoMessage=" + message);
+				String message = "Successfully Registered";
+				response.sendRedirect("login.jsp?infoMessage=" + message);
 
-				} else {
-					String message = "!!Invalid Login Credentials!!";
-					response.sendRedirect("registration.jsp?errorMessage=" + message);
-
-				}
-			} catch (ValidException e) {
+			} else {
 				String message = "!!Invalid Login Credentials!!";
 				response.sendRedirect("registration.jsp?errorMessage=" + message);
+
 			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ValidException e) {
+			String message = "!!Invalid Login Credentials!!";
+			response.sendRedirect("registration.jsp?errorMessage=" + message);
 		}
+
 	}
 
 }

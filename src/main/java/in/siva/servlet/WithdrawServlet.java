@@ -33,26 +33,22 @@ public class WithdrawServlet extends HttpServlet {
 
 			String price = request.getParameter("amount");
 			float amount = 0;
-			try {
-				amount = NumberValidator.parseFloat(price, "Invalid amount");
-				double balance = TransactionManagement.withdrawAmount(email, amount);
 
-				if (balance != 0) {
+			amount = NumberValidator.parseFloat(price, "Invalid amount");
+			double balance = TransactionManagement.withdrawAmount(email, amount);
 
-					String message = "Withdraw Success ";
-					response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
-				} else {
-					String message = "Withdrawal failed";
-					response.sendRedirect("withdraw.jsp?errormessage=" + message);
-				}
-			} catch (ValidException e) {
+			if (balance != 0) {
+
+				String message = "Withdraw Success ";
+				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
+			} else {
 				String message = "Withdrawal failed";
 				response.sendRedirect("withdraw.jsp?errormessage=" + message);
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ValidException e) {
+			String message = "Withdrawal failed";
+			response.sendRedirect("withdraw.jsp?errormessage=" + message);
 		}
-
 	}
+
 }
