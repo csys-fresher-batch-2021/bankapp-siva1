@@ -7,28 +7,47 @@
 <body>
 	<jsp:include page="message.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h3>Bank APP</h3>
+		<h3>Deposit Page</h3>
 
-		<form action="DepositServlet" method="get">
+		<form id="depositForm" action="DepositServlet" method="get" 
+			novalidate="novalidate" onsubmit="deposit()">
 
+			<div class="mb-2 col-4">
+				<label>Enter Amount To Deposit</label> <input type="number"
+					name="amount" id="amount" min="100" class="form-control"
+					placeholder="Enter Amount Here" required autofocus><br />
+				<div class="invalid-feedback">Please Enter an amount</div>
 
-			<label>Enter Amount To Deposit</label> <input type="number"
-				name="amount" id="amount" min="100" placeholder="Enter Amount Here"
-				required autofocus>
-			<button>Enter</button>
+			</div>
+			<div class="mb-3 col-4">
+				<button class="btn btn-primary">Enter</button>
+			</div>
 			<br />
-			<%
-			String amount = request.getParameter("Balance");
-			if (amount != null) {
-				out.println("!!Deposit Success!!");
-				out.println("Your current balance = Rs." + amount);
-			}
-			%>
+
 		</form>
-
-
-
-
 	</main>
+	<script>
+		function deposit() {
+			event.preventDefault();
+			// Step 1: Get Form Values
+			let deposit = document.querySelector("#depositForm");
+			let amount = document.querySelector("#amount");
+
+			console.log(amount);
+			// 2. Check form is valid
+			if (deposit.checkValidity()) {
+				deposit.classList.remove("was-validated");
+				deposit.submit(); //if valid, then submit the form( which will call the LoginServlet)
+			} else {
+				deposit.classList.add("was-validated");
+				//field errors
+				if (amount.value.length == 0) {
+					amount.classList.add("is-invalid");
+				} else {
+					amount.classList.add("is-valid");
+				}
+			}
+		}
+	</script>
 </body>
 </html>

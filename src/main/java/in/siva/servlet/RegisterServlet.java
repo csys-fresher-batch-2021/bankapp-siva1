@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.siva.exception.ValidException;
 import in.siva.model.User;
 import in.siva.service.UserManagement;
 
@@ -25,42 +26,39 @@ public class RegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String name = request.getParameter("username");
-		String password = request.getParameter("userpassword");
-		Long mobile = Long.parseLong(request.getParameter("number"));
-		String address = request.getParameter("address");
-		String email = request.getParameter("email");
-		float amount = Float.parseFloat(request.getParameter("amount"));
-		
-
-		User user = new User();
-		user.setName(name);
-		user.setPassword(password);
-		user.setMobileNo(mobile);
-		user.setAddress(address);
-		user.setBalance(amount);
-		user.setEmail(email);
 		try {
+			String name = request.getParameter("username");
+			String password = request.getParameter("userpassword");
+			Long mobile = Long.parseLong(request.getParameter("number"));
+			String address = request.getParameter("address");
+			String email = request.getParameter("email");
+			float amount = Float.parseFloat(request.getParameter("amount"));
 
-		boolean valid = UserManagement.registerDetails(user);// validating the details
-		// condition for valid details
-		if (valid) {
-			String message = "Successfully Registered";
-			response.sendRedirect("login.jsp?infoMessage=" + message);
+			User user = new User();
+			user.setName(name);
+			user.setPassword(password);
+			user.setMobileNo(mobile);
+			user.setAddress(address);
+			user.setBalance(amount);
+			user.setEmail(email);
 
-		} else {
+			boolean valid = UserManagement.registerDetails(user);// validating the details
+			// condition for valid details
+			if (valid) {
+
+				String message = "Successfully Registered";
+				response.sendRedirect("login.jsp?infoMessage=" + message);
+
+			} else {
+				String message = "!!Invalid Login Credentials!!";
+				response.sendRedirect("registration.jsp?errorMessage=" + message);
+
+			}
+		} catch (ValidException e) {
 			String message = "!!Invalid Login Credentials!!";
 			response.sendRedirect("registration.jsp?errorMessage=" + message);
+		}
 
-		}
-    }
-		catch (Exception e) {
-			String message = "!!Invalid Login Credentials!!";
-			response.sendRedirect("registration.jsp?errorMessage=" + message);
-		}
 	}
 
-
 }
-
-

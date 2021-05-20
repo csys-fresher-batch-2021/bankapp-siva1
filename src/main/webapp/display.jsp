@@ -56,7 +56,7 @@
 		
 		</table>
 		<a href="deposit.jsp" class="btn btn-primary">Deposit</a>
-	    
+	    <a href="withdraw.jsp" class="btn btn-primary">Withdraw</a>
 		</form>
 		
 		

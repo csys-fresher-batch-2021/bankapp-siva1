@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import in.siva.exception.ValidException;
+
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DisplayTest {
 
@@ -14,22 +16,22 @@ public class DisplayTest {
 
 	@Test
 	public void displayUserDetails() {
-		String name = "Ramesh";
-		UserManagement.getAllUser(name);
-		int size = UserManagement.getList().size();
+		String email = "vishvajith257@gmail.com";
+		UserManagement.getAllUser(email);
+		int size = UserManagement.getAllUser(email).size();
 
-		assertEquals(3,size);
+		assertEquals(1,size);
 
 	}
 
 	@Test
 	public void isDisplayFailed() {
-		String name = "yu";
+		String email = "Siva@mail";
 
 		try {
-			UserManagement.getAllUser(name);
+			UserManagement.getAllUser(email);
 			fail();
-		} catch (RuntimeException e) {
+		} catch (ValidException e) {
 			// TODO Auto-generated catch block
 			assertEquals("Enter Your Correct Account Name", e.getMessage());
 		}

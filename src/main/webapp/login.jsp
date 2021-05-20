@@ -11,19 +11,19 @@
 
 		<form id="loginForm" class="" action="LoginServlet" onsubmit="login()"
 			novalidate="novalidate" method="post">
-			<div class="mb-5 col-4">
-			<label>UserName</label>
+			<div class="mb-2 col-4">
+			<label>Email Id</label>
 			
-			<input type="text" name="name" id="name"placeholder="Enter Your Registered Name" class="form_control" required autofocus><br />
-			<div class="invalid-feedback">Please choose a username.</div>
+			<input type="email" name="email" id="email"placeholder="Enter Your Registered EmailId" class="form-control" required autofocus><br />
+			<div class="invalid-feedback">Please choose an Email.</div>
 			</div>
-			<div class="mb-5 col-4">
+			<div class="mb-2 col-4">
 			<label>Password</label>
 			 
-			<input type="password" name="password"id="password" placeholder="Enter Your Password" class="form_control"required><br />
+			<input type="password" name="password"id="password" placeholder="Enter Your Password" class="form-control"required><br />
 			<div class="invalid-feedback">Please choose a password.</div>
 			</div>
-			<div class="mb-5 col-4">
+			<div class="mb-2 col-4">
 			<button class="btn btn-success">Submit</button> 
 			</div>
 		</form>
@@ -38,7 +38,7 @@
 			event.preventDefault();
 			// Step 1: Get Form Values
 			let loginForm = document.querySelector("#loginForm");
-			let username = document.querySelector("#name");
+			let username = document.querySelector("#email");
 			let password = document.querySelector("#password");
 			console.log(username + "-" + password);
 			// 2. Check form is valid

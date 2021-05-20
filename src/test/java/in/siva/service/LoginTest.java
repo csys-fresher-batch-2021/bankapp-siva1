@@ -10,10 +10,10 @@ public class LoginTest {
 	/**
 	 * Test case for correct username and password
 	 */
-	public void correctUsernameAndPassword() {
-		String userName = "Ramesh";
-		String password = "Gkram@123";
-		boolean valid = UserManagement.loginValidation(userName, password);
+	public void correctEmailAndPassword() {
+		String email = "vishvajith257@gmail.com";
+		String password = "Siva@123";
+		boolean valid = UserManagement.loginValidation(email, password);
 		assertTrue(valid);
 
 	}
@@ -22,10 +22,10 @@ public class LoginTest {
 	/**
 	 * Test case for correct username and wrong password
 	 */
-	public void correctUsernameWrongPassword() {
-		String userName = "Siva";
+	public void correctEmailWrongPassword() {
+		String email = "gururam12@gmail.com";
 		String password = "1234";
-		boolean valid = UserManagement.loginValidation(userName, password);
+		boolean valid = UserManagement.loginValidation(email, password);
 		assertFalse(valid);
 	}
 
@@ -35,10 +35,10 @@ public class LoginTest {
 	 * 
 	 */
 
-	public void correctPasswordWrongUsername() {
-		String userName = "Arun";
+	public void correctPasswordWrongEmail() {
+		String email = "siva@gmail";
 		String password = "Siva@123";
-		boolean valid = UserManagement.loginValidation(userName, password);
+		boolean valid = UserManagement.loginValidation(email, password);
 		assertFalse(valid);
 	}
 
@@ -46,10 +46,10 @@ public class LoginTest {
 	/**
 	 * Test case for wrong username and password
 	 */
-	public void wrongUsernameAndPassword() {
-		String userName = "ramesh";
-		String password = "gkram@123";
-		boolean valid = UserManagement.loginValidation(userName, password);
+	public void wrongEmailAndPassword() {
+		String email = "arun@email.com";
+		String password = "Arun@123";
+		boolean valid = UserManagement.loginValidation(email, password);
 		assertFalse(valid);
 
 	}
@@ -58,10 +58,10 @@ public class LoginTest {
 	/**
 	 * Test case for null password and username
 	 */
-	public void isUsernameAndPasswordNull() {
-		String userName = null;
+	public void isEmailAndPasswordNull() {
+		String email = null;
 		String password = null;
-		boolean valid = UserManagement.loginValidation(userName, password);
+		boolean valid = UserManagement.loginValidation(email, password);
 		assertFalse(valid);
 	}
 
@@ -69,10 +69,10 @@ public class LoginTest {
 	/**
 	 * Test case for null username and correct password
 	 */
-	public void isUsernameNull() {
-		String userName = null;
+	public void isEmailNull() {
+		String email = null;
 		String password = "Siva@123";
-		boolean valid = UserManagement.loginValidation(userName, password);
+		boolean valid = UserManagement.loginValidation(email, password);
 		assertFalse(valid);
 	}
 
@@ -81,9 +81,9 @@ public class LoginTest {
 	 * Test case for correct username and wrong password
 	 */
 	public void PasswordNull() {
-		String userName = "Siva";
+		String email = "vishvajith257@gmail.com";
 		String password = null;
-		boolean valid = UserManagement.loginValidation(userName, password);
+		boolean valid = UserManagement.loginValidation(email, password);
 		assertFalse(valid);
 	}
 }

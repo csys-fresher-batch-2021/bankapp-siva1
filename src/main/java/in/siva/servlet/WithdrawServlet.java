@@ -1,7 +1,6 @@
 package in.siva.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,10 +13,10 @@ import in.siva.service.TransactionManagement;
 import in.siva.util.NumberValidator;
 
 /**
- * Servlet implementation class DepositServlet
+ * Servlet implementation class WithdrawServlet
  */
-@WebServlet("/DepositServlet")
-public class DepositServlet extends HttpServlet {
+@WebServlet("/WithdrawServlet")
+public class WithdrawServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -29,27 +28,27 @@ public class DepositServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			String price = request.getParameter("amount");
 			HttpSession session = request.getSession();
 			String email = (String) session.getAttribute("LOGGED_IN_USER");
+
+			String price = request.getParameter("amount");
 			float amount = 0;
 
 			amount = NumberValidator.parseFloat(price, "Invalid amount");
-			double balance = TransactionManagement.depositAmount(email, amount);
+			double balance = TransactionManagement.withdrawAmount(email, amount);
 
 			if (balance != 0) {
 
-				String message = "Deposit Success ";
+				String message = "Withdraw Success ";
 				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
 			} else {
-				String message = "Deposit failed";
-				response.sendRedirect("deposit.jsp?errormessage=" + message);
+				String message = "Withdrawal failed";
+				response.sendRedirect("withdraw.jsp?errormessage=" + message);
 			}
-		} catch (ValidException | IOException e) {
-			String message = "Deposit failed";
-			response.sendRedirect("deposit.jsp?errormessage=" + message);
-
+		} catch (ValidException e) {
+			String message = "Withdrawal failed";
+			response.sendRedirect("withdraw.jsp?errormessage=" + message);
 		}
-
 	}
+
 }
