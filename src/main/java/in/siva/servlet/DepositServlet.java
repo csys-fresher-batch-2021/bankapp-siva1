@@ -28,26 +28,31 @@ public class DepositServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String price = request.getParameter("amount");
-		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("LOGGED_IN_USER");
-		float amount =0;
 		try {
-			amount = NumberValidator.parseFloat(price, "Invalid amount");
-			double balance = TransactionManagement.depositAmount(email, amount);
+			String price = request.getParameter("amount");
+			HttpSession session = request.getSession();
+			String email = (String) session.getAttribute("LOGGED_IN_USER");
+			float amount =0;
+			try {
+				amount = NumberValidator.parseFloat(price, "Invalid amount");
+				double balance = TransactionManagement.depositAmount(email, amount);
 
-			if (balance != 0) {
+				if (balance != 0) {
 
-				String message = "Deposit Success ";
-				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
-			} else {
+					String message = "Deposit Success ";
+					response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
+				} else {
+					String message = "Deposit failed";
+					response.sendRedirect("deposit.jsp?errormessage=" + message);
+				}
+			} catch (ValidException e) {
 				String message = "Deposit failed";
 				response.sendRedirect("deposit.jsp?errormessage=" + message);
-			}
-		} catch (ValidException e) {
-			String message = "Deposit failed";
-			response.sendRedirect("deposit.jsp?errormessage=" + message);
 
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
