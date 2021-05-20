@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import in.siva.exception.ValidException;
 import in.siva.service.TransactionManagement;
+import in.siva.util.NumberValidator;
 
 /**
  * Servlet implementation class DepositServlet
@@ -27,10 +28,12 @@ public class DepositServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		float amount = Float.parseFloat(request.getParameter("amount"));
+		String price = request.getParameter("amount");
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("LOGGED_IN_USER");
+		float amount =0;
 		try {
+			amount = NumberValidator.parseFloat(price, "Invalid amount");
 			double balance = TransactionManagement.depositAmount(email, amount);
 
 			if (balance != 0) {
