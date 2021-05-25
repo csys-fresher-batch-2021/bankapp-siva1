@@ -1,65 +1,55 @@
-<%@page import="in.siva.model.User"%>
-<%@page import="java.util.List"%>
-<%@page import="in.siva.service.UserManagement"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <title>Bank APP</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<main class="container-fluid">
-		<form action="LoginSeverlet" method="get">
-		<h3>UserDetails</h3>
-		<table class="table	table-bordered">
+
+	<h3>Welcome To Bank APP</h3>
+	<table class="table	table-bordered">
 		<caption>Users bank account details</caption>
-		<thead><tr>
-		
-		<th scope="col">Type</th>
-		<th scope="col">Details</th>
-		
-		<%
-		String userName = (String)session.getAttribute("LOGGED_IN_USER");
-		List<User> userList = UserManagement.getAllUser(userName);
-		User user = userList.get(0);
-		 
-		%>
-		
-		<tbody>
-		<tr><td>Name</td>
-		<td><%=user.getName() %>
-		</tr>
-		<tr><td>AccountNumber</td>
-		<td><%=user.getAccNo() %>
-		
-		</tr>
-		<tr><td>Email</td>
-		<td><%=user.getEmail() %></td>
-		</tr>
-		<tr>
-		<td>Address</td>
-		<td><%=user.getAddress() %>
-		</td></tr>
-		<tr><td>Mobile</td>
-		<td><%=user.getMobileNo() %></td>
-		</tr>
-		<tr><td>Balance</td>
-		<td><%=user.getBalance() %></td>
-		</tr>
-		
-	 	  
+		<thead>
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">Account Number</th>
+				<th scope="col">Email Id</th>
+				<th scope="col">MobileNumber</th>
+				<th scope="col">Address</th>
+				<th scope="col">Balance</th>
+			</tr>
+		</thead>
+		<tbody id="userlist">
 		</tbody>
+
+
+	</table>
+
+	<a href="deposit.jsp" class="btn btn-primary">Deposit</a>
+	<a href="withdraw.jsp" class="btn btn-primary">Withdraw</a>
+	<a href="transferamount.jsp" class="btn btn-primary">TransferAmount</a>
+	<script>
+	function getAllDetails(){
+	
+	let url = "DisplayServlet?userId=<%=(String) session.getAttribute("LOGGED_IN_USER")%>";
+	fetch(url).then(res=>res.json()).then(res=>{
 		
+		let users = res;		
+		let details = "";
+		for(let user of users){
+			
+			details += "<tr><td>" +user.name+ "</td><td>" + user.accNo + "</td><td>" + user.email+"</td><td>"+user.mobileNo+"</td><td>"+user.address+"</td><td>"+user.balance+"</td></tr>";
+			
+		}
 		
-		
-		
-		
-		</table>
-		<a href="deposit.jsp" class="btn btn-primary">Deposit</a>
-	    <a href="withdraw.jsp" class="btn btn-primary">Withdraw</a>
-		</form>
-		
-		
-	</main>
+		document.querySelector("#userlist").innerHTML = details;
+	})
+	
+	}
+getAllDetails();
+	
+	</script>
 </body>
 </html>

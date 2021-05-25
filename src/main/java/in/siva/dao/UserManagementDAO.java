@@ -1,10 +1,15 @@
 package in.siva.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.siva.connectionutil.ConnectionUtil;
 import in.siva.model.User;
-import in.siva.service.UserManagement;
+
 
 public class UserManagementDAO {
 	private UserManagementDAO() {
@@ -46,20 +51,46 @@ public class UserManagementDAO {
 	 * @param userName     // name of the user
 	 * @param userPassword //password given by the user
 	 * @return
+	 * @throws SQLException
 	 */
 
-	public static boolean login(String email, String password) {
-
+	public static boolean login(String email, String password) throws SQLException {
+		PreparedStatement pst = null;
+		Connection connection = null;
+		ResultSet rs = null;
 		boolean valid = false;
-		for (User validation : userList) {
-			// condition for matching the given name and password
-			if (validation.getEmail().equalsIgnoreCase(email) && validation.getPassword().equals(password)) {
+		try {
 
+			connection = ConnectionUtil.getConnection();
+			String sql = "select email,password from bank_userdetails where email = ? and password =?";
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, email);
+			pst.setString(2, password);
+			rs = pst.executeQuery();
+			if (rs.next()) {
 				valid = true;
-				break;
 			}
 
+		} catch (ClassNotFoundException | SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			if (pst != null) {
+
+				pst.close();
+			}
+
+			if (connection != null) {
+
+				connection.close();
+
+			}
+			if (rs != null) {
+				rs.close();
+			}
 		}
+
 		return valid;
 	}
 
@@ -67,14 +98,51 @@ public class UserManagementDAO {
 	 * Register with user details Add the user Details in ArrayList
 	 * 
 	 * @param list //Details of user
+	 * @throws SQLException
 	 */
 
-	public static boolean register(User user) {
+	public static boolean register(User user) throws SQLException {
+
 		boolean register = false;
-		int id = userList.size() + 1000001;
-		user.setAccNo(id);
-		userList.add(user);
-		register = true;
+		Connection connection = null;
+		PreparedStatement pst = null;
+
+		try {
+			// Get the connection
+			connection = ConnectionUtil.getConnection();
+
+			// Query
+			if (connection != null) {
+				String sql = "insert into bank_userdetails(name,password,email,address,balance,mobileno)values(?,?,?,?,?,?)";
+
+				// Execute
+				pst = connection.prepareStatement(sql);
+				pst.setString(1, user.getName());
+				pst.setString(2, user.getPassword());
+				pst.setString(3, user.getEmail());
+				pst.setString(4, user.getAddress());
+				pst.setFloat(5, user.getBalance());
+				pst.setLong(6, user.getMobileNo());
+
+				pst.executeUpdate();
+				register = true;
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			if (pst != null) {
+
+				pst.close();
+
+			}
+			if (connection != null) {
+
+				connection.close();
+
+			}
+		}
 
 		return register;
 	}
@@ -86,16 +154,35 @@ public class UserManagementDAO {
 	 * @return
 	 */
 
-	public static List<User> getUsers(String email) {
-		List<User> search = new ArrayList<>();
+	public static List<User> getUsers(String email) throws ClassNotFoundException, SQLException {
+		List<User> list = new ArrayList<>();
 
-		for (User display : userList) {
-			if (display.getEmail().equals(email)) {
-				search.add(display);
-				break;
-			}
+		Connection connection = ConnectionUtil.getConnection();
+		String sql = "select name,email,address,balance,mobileno,accno from bank_userdetails where email=? ";
+		PreparedStatement pst = connection.prepareStatement(sql);
+		pst.setString(1, email);
+		ResultSet rs = pst.executeQuery();
+		while (rs.next()) {
+			User user = new User();
+			String name = rs.getString(1);
+			String emailId = rs.getString(2);
+			String address = rs.getString(3);
+			float balance = rs.getFloat(4);
+			long mobileno = rs.getLong(5);
+			int accno = rs.getInt(6);
+			user.setName(name);
+			user.setEmail(emailId);
+			user.setAddress(address);
+			user.setBalance(balance);
+			user.setMobileNo(mobileno);
+			user.setAccNo(accno);
+
+			list.add(user);
 		}
-		return search;
+
+		ConnectionUtil.close(rs, pst, connection);
+		return list;
+		
 	}
 
 	/**
@@ -103,22 +190,25 @@ public class UserManagementDAO {
 	 * 
 	 * @param name   // name of user
 	 * @param amount // amount to deposit
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
 
-	public static double deposit(String name, double amount) {
-		double balance = 0;
-
-		for (User deposit : getList()) {
-
-			if (deposit.getEmail().equals(name)) {
-
-				balance = amount + deposit.getBalance();// deposit calculation
-
-				break;
-			}
-
+	public static double deposit(String email, double amount) throws ClassNotFoundException, SQLException {
+		double accountBalance = 0;
+		Connection connection = ConnectionUtil.getConnection();
+		String sql = "select balance from bank_userdetails where email = ?";
+		PreparedStatement pst = connection.prepareStatement(sql);
+		pst.setString(1, email);
+		ResultSet rs = pst.executeQuery();
+		while (rs.next()) {
+			float balance = rs.getFloat(1);
+			accountBalance = balance + amount;
 		}
-		return balance;
+
+		ConnectionUtil.close(rs, pst, connection);
+
+		return accountBalance;
 	}
 
 	/**
@@ -127,18 +217,28 @@ public class UserManagementDAO {
 	 * @param name   // name of user
 	 * @param amount // amount withdraw by user
 	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
 
-	public static double withdraw(String email, double amount) {
-		double balance = 0;
+	public static double withdraw(String email, double amount) throws ClassNotFoundException, SQLException {
+		double accountBalance = 0;
 
-		for (User withdraw : UserManagement.getAllUser(email)) {
-			if (withdraw.getEmail().equals(email)) {
-				balance = withdraw.getBalance() - amount;
-				break;
+		Connection connection = ConnectionUtil.getConnection();
+		String sql = "select balance from bank_userdetails where email = ?";
+		PreparedStatement pst = connection.prepareStatement(sql);
+		pst.setString(1, email);
+		ResultSet rs = pst.executeQuery();
+		while (rs.next()) {
+			float balance = rs.getFloat(1);
+			if (balance > amount && amount > 0) {
+				accountBalance = balance - amount;
 			}
 		}
-		return balance;
+		ConnectionUtil.close(rs, pst, connection);
+
+		return accountBalance;
 	}
+
 
 }
