@@ -26,7 +26,7 @@ public class TransactionDAO {
 		double accountBalance = 0;
 		Connection connection = null;
 		PreparedStatement pst = null;
-		;
+
 		ResultSet rs = null;
 		try {
 			connection = ConnectionUtil.getConnection();

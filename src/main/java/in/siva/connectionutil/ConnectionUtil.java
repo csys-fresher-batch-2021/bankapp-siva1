@@ -11,20 +11,20 @@ public class ConnectionUtil {
 	private ConnectionUtil() {
 		// Default Constructor
 	}
-	private static final String driverClass = System.getenv("spring.datasource.driver-class-name");
-	private static final String url = System.getenv("spring.datasource.url");
-	private static final String username = System.getenv("spring.datasource.username");
-	private static final String password = System.getenv("spring.datasource.password");
+	private static final String DRIVERCLASS = System.getenv("spring.datasource.driver-class-name");
+	private static final String URL = System.getenv("spring.datasource.url");
+	private static final String USERNAME = System.getenv("spring.datasource.username");
+	private static final String PASSWORD = System.getenv("spring.datasource.password");
 
 
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 
 
 		// Loading the JDBC driver in memory
-		Class.forName(driverClass);
+		Class.forName(DRIVERCLASS);
 
 		// Getting the connection
-		return DriverManager.getConnection(url, username, password);
+		return DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
 	}
 
