@@ -1,5 +1,6 @@
 package in.siva.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import in.siva.dao.UserManagementDAO;
@@ -25,7 +26,14 @@ public class UserManagement {
 		boolean valid = false;
 		// Condition for name and password validation
 		if (UserValidation.emailValidation(email) && UserValidation.passwordValidation(userPassword)) {
-			valid = UserManagementDAO.login(email, userPassword);
+			try {
+				valid = UserManagementDAO.login(email, userPassword);
+			} catch (SQLException e) {
+				// Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			throw new ValidException("Enter your registered details");
 		}
 
 		return valid;
@@ -40,7 +48,14 @@ public class UserManagement {
 		boolean register = false;
 		// Condition for valid details
 		if (UserValidation.isValidUser(user)) {
-			register = UserManagementDAO.register(user);
+			try {
+				register = UserManagementDAO.register(user);
+			} catch (SQLException e) {
+				// Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			throw new ValidException("Give correct details");
 		}
 		return register;
 
@@ -53,12 +68,16 @@ public class UserManagement {
 	 * @return
 	 */
 	public static List<User> getAllUser(String email) {
+
 		List<User> display = null;
-		// Condition for valid email
-		if (UserValidation.emailValidation(email)) {
-			display = UserManagementDAO.getUsers(email);
-		} else {
-			throw new ValidException("Enter Your Correct Account Name");
+		try {
+			if (UserValidation.emailValidation(email)) {
+				display = UserManagementDAO.getUsers(email);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+
 		}
 		return display;
 	}

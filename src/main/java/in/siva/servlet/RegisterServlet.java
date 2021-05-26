@@ -55,8 +55,9 @@ public class RegisterServlet extends HttpServlet {
 
 			}
 		} catch (ValidException e) {
+			e.printStackTrace();
 			String message = "!!Invalid Login Credentials!!";
-			response.sendRedirect("registration.jsp?errorMessage=" + message);
+			//response.sendRedirect("registration.jsp?errorMessage=" + message);
 		}
 
 	}

@@ -1,5 +1,7 @@
 package in.siva.service;
 
+import java.sql.SQLException;
+
 import in.siva.dao.UserManagementDAO;
 import in.siva.exception.ValidException;
 import in.siva.validator.UserValidation;
@@ -22,7 +24,12 @@ public class TransactionManagement {
 
 		// condition to validate email and amount
 		if (UserValidation.emailValidation(email) && UserValidation.isValidAmount(amount)) {
-			balance = UserManagementDAO.deposit(email, amount);
+			try {
+				balance = UserManagementDAO.deposit(email, amount);
+			} catch (ClassNotFoundException | SQLException e) {
+				// Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		else {
@@ -43,10 +50,17 @@ public class TransactionManagement {
 		double balance = 0;
 		// condition to validate email and amount
 		if (UserValidation.emailValidation(email) && UserValidation.isValidAmount(amount)) {
-			balance = UserManagementDAO.withdraw(email, amount);
+			try {
+
+				balance = UserManagementDAO.withdraw(email, amount);
+			} catch (ClassNotFoundException | SQLException e) {
+				// Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			throw new ValidException("Enter a valid amount");
 		}
 		return balance;
 	}
+
 }

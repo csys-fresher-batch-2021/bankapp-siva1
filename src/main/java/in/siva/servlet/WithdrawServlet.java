@@ -1,6 +1,8 @@
 package in.siva.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +42,9 @@ public class WithdrawServlet extends HttpServlet {
 			if (balance != 0) {
 
 				String message = "Withdraw Success ";
+				request.setAttribute(price, message);
 				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
+				 		
 			} else {
 				String message = "Withdrawal failed";
 				response.sendRedirect("withdraw.jsp?errormessage=" + message);

@@ -21,7 +21,7 @@ public class UserValidation {
 
 		boolean valid = false;
 		// Name Pattern Declaration
-		String regx = "^\\w{4,20}$";
+		String regx = "^[A-Z]\\w{4,29}$";
 
 		if (name != null) {
 			Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);// Compiles the given pattern
