@@ -7,17 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConnectionUtil {
-	
+
 	private ConnectionUtil() {
-		//Default Constructor
+		// Default Constructor
 	}
+	private static final String driverClass = System.getenv("spring.datasource.driver-class-name");
+	private static final String url = System.getenv("spring.datasource.url");
+	private static final String username = System.getenv("spring.datasource.username");
+	private static final String password = System.getenv("spring.datasource.password");
+
 
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 
-		String driverClass = "org.postgresql.Driver";
-		String url = "jdbc:postgresql://projecttracker.ck1ayq0lncmp.ap-south-1.rds.amazonaws.com/bankapp_db";
-		String username = "prod_user";
-		String password = "prod_user";
 
 		// Loading the JDBC driver in memory
 		Class.forName(driverClass);
@@ -28,8 +29,13 @@ public class ConnectionUtil {
 	}
 
 	/**
-	 * Method overloading concept to close connection
+	 * Method overloading concept to close connection , preparedstatement,resultset
+	 * 
+	 * @param rs
+	 * @param statement
+	 * @param connection
 	 */
+
 	public static void close(ResultSet rs, PreparedStatement statement, Connection connection) {
 		try {
 
@@ -41,6 +47,26 @@ public class ConnectionUtil {
 			}
 			if (connection != null) {
 				connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Method to close connection and prepared statement
+	 * 
+	 * @param connection
+	 * @param statement
+	 */
+	public static void closed(Connection connection, PreparedStatement statement) {
+		try {
+			if (connection != null) {
+				connection.close();
+
+			}
+			if (statement != null) {
+				statement.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

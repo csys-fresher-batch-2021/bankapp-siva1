@@ -33,7 +33,6 @@ public class DepositServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			String email = (String)session.getAttribute("LOGGED_IN_USER");
 			float amount = 0;
-
 			amount = NumberValidator.parseFloat(price, "Invalid amount");
 			double balance = TransactionManagement.depositAmount(email, amount);
 

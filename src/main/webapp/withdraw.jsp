@@ -9,7 +9,6 @@
 		<h3>Withdrawal Page</h3>
 		
 		<form id="withdrawForm"action="WithdrawServlet" method="get" onsubmit="withdraw()" novalidate="novalidate">
-		
 		<div class="mb-2 col-4">
 		<label>Enter Amount To Withdraw</label>
 		<input type="number" name="amount" id="amount"  min="100" placeholder="Enter Amount Here" class="form-control" required autofocus><br />
