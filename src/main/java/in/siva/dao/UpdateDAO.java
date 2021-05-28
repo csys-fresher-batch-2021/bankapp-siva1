@@ -8,12 +8,20 @@ import in.siva.connectionutil.ConnectionUtil;
 
 public class UpdateDAO {
 
-	private UpdateDAO() {
-		// Default Constructor
+	
+
+	private static UpdateDAO instance = new UpdateDAO();
+
+	/**
+	 * This method gets instance of UpdateDAO
+	 * 
+	 * @return UpdateDAO
+	 */
+	public static UpdateDAO getInstance() {
+		return instance;
 	}
 
-	public static boolean updateBalance(String email, double amount, String type)
-			throws ClassNotFoundException, SQLException {
+	public boolean updateBalance(int accno, double amount, String type) throws ClassNotFoundException, SQLException {
 
 		boolean isUpdated = false;
 		Connection connection = null;
@@ -23,14 +31,14 @@ public class UpdateDAO {
 			String sql = null;
 
 			if (type.equals("DEPOSIT")) {
-				sql = "update bank_userdetails set balance = balance + ? where email = ?";
+				sql = "update bank_userdetails set balance = balance + ? where accno = ?";
 			} else if (type.equals("WITHDRAW")) {
-				sql = "update bank_userdetails set balance =balance - ? where email = ?";
+				sql = "update bank_userdetails set balance =balance - ? where accno = ?";
 			}
 			pst = connection.prepareStatement(sql);
 
 			pst.setDouble(1, amount);
-			pst.setString(2, email);
+			pst.setInt(2, accno);
 			double updatedBalance = pst.executeUpdate();
 			if (updatedBalance == 1) {
 				isUpdated = true;

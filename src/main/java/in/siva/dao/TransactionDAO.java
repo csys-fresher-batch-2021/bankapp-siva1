@@ -9,8 +9,16 @@ import in.siva.connectionutil.ConnectionUtil;
 
 public class TransactionDAO {
 
-	private TransactionDAO() {
-		// Default Constructor
+	
+	private static TransactionDAO instance = new TransactionDAO();
+
+	/**
+	 * This method gets the instance of TransactionDAO
+	 * 
+	 * @return TransactionDAO
+	 */
+	public static TransactionDAO getInstance() {
+		return instance;
 	}
 
 	/**
@@ -22,7 +30,7 @@ public class TransactionDAO {
 	 * @throws ClassNotFoundException
 	 */
 
-	public static double deposit(String email, double amount) throws ClassNotFoundException, SQLException {
+	public double deposit(int accno, double amount) throws ClassNotFoundException, SQLException {
 		double accountBalance = 0;
 		Connection connection = null;
 		PreparedStatement pst = null;
@@ -30,9 +38,9 @@ public class TransactionDAO {
 		ResultSet rs = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select balance from bank_userdetails where email = ?";
+			String sql = "select balance from bank_userdetails where accno = ?";
 			pst = connection.prepareStatement(sql);
-			pst.setString(1, email);
+			pst.setInt(1, accno);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				float balance = rs.getFloat(1);
@@ -48,6 +56,11 @@ public class TransactionDAO {
 		return accountBalance;
 	}
 
+	public void fundTransfer(int fromAccNo, int toAccNo, float amount) throws ClassNotFoundException, SQLException {
+		withdraw(fromAccNo, amount);
+		deposit(toAccNo, amount);
+	}
+
 	/**
 	 * Withdraw money from account
 	 * 
@@ -58,7 +71,7 @@ public class TransactionDAO {
 	 * @throws ClassNotFoundException
 	 */
 
-	public static double withdraw(String email, double amount) throws ClassNotFoundException, SQLException {
+	public double withdraw(int accno, double amount) throws ClassNotFoundException, SQLException {
 		double accountBalance = 0;
 
 		Connection connection = null;
@@ -66,9 +79,9 @@ public class TransactionDAO {
 		ResultSet rs = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select balance from bank_userdetails where email = ?";
+			String sql = "select balance from bank_userdetails where accno = ?";
 			pst = connection.prepareStatement(sql);
-			pst.setString(1, email);
+			pst.setInt(1, accno);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				float balance = rs.getFloat(1);

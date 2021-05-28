@@ -20,15 +20,17 @@ public class TransactionManagement {
 	 * @param name   // name of user
 	 * @param amount // amount to deposit
 	 */
+	private static TransactionDAO transactionDAO = new TransactionDAO();
+	private static UpdateDAO updateDAO = new UpdateDAO();
 
-	public static double depositAmount(String email, float amount) {
+	public static double depositAmount(int accNo, float amount) {
 		double balance = 0;
 
 		// condition to validate email and amount
-		if (UserValidation.emailValidation(email) && UserValidation.isValidAmount(amount)) {
+		if (UserValidation.isValidAmount(amount)) {
 			try {
-				balance = TransactionDAO.deposit(email, amount);
-				UpdateDAO.updateBalance(email, amount,"DEPOSIT");
+				balance = transactionDAO.deposit(accNo, amount);
+				updateDAO.updateBalance(accNo, amount, "DEPOSIT");
 			} catch (ClassNotFoundException | SQLException e) {
 				// Auto-generated catch block
 				e.printStackTrace();
@@ -36,7 +38,7 @@ public class TransactionManagement {
 		}
 
 		else {
-			throw new ValidException("Enter a valid amount");
+			throw new ValidException("Enter a valid details");
 		}
 		return balance;
 	}
@@ -49,22 +51,39 @@ public class TransactionManagement {
 	 * @return
 	 */
 
-	public static double withdrawAmount(String email, float amount) {
+	public static double withdrawAmount(int accNo, float amount) {
 		double balance = 0;
 		// condition to validate email and amount
-		if (UserValidation.emailValidation(email) && UserValidation.isValidAmount(amount)) {
+		if (UserValidation.isValidAmount(amount)) {
 			try {
 
-				balance = TransactionDAO.withdraw(email, amount);
-				UpdateDAO.updateBalance(email, amount,"WITHDRAW");
+				balance = transactionDAO.withdraw(accNo, amount);
+				updateDAO.updateBalance(accNo, amount, "WITHDRAW");
 			} catch (ClassNotFoundException | SQLException e) {
 				// Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
-			throw new ValidException("Enter a valid amount");
+			throw new ValidException("Enter a valid details");
 		}
 		return balance;
+	}
+
+	public static void transferAmount(int senderAccNo, int receiverAccNo, float amount) {
+
+		if (UserValidation.isValidAmount(amount)) {
+			try {
+				transactionDAO.fundTransfer(senderAccNo, receiverAccNo, amount);
+				updateDAO.updateBalance(receiverAccNo, amount, "DEPOSIT");
+
+			} catch (ClassNotFoundException | SQLException e) {
+
+				e.printStackTrace();
+			}
+		} else {
+
+			throw new ValidException("Enter valid details");
+		}
 	}
 
 }

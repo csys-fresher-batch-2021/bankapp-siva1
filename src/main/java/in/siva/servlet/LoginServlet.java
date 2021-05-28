@@ -33,7 +33,10 @@ public class LoginServlet extends HttpServlet {
 		// Condition for valid Login
 		if (valid) {
 			HttpSession session = request.getSession(); // Creating a Session
-			session.setAttribute("LOGGED_IN_USER", email); // Setting username in session
+			session.setAttribute("LOGGED_IN_USER", email);
+			int accNo = UserManagement.getAccNo(email);
+			session.setAttribute("ACCOUNTNUMBER", accNo);
+			// Setting username in session
 			String message = "Successfully logged in";
 			response.sendRedirect("display.jsp?infoMessage=" + message);
 

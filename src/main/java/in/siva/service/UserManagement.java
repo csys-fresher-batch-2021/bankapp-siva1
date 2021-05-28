@@ -21,17 +21,15 @@ public class UserManagement {
 	 * @param userPassword //password given by the user
 	 * @return
 	 */
+	private static UserManagementDAO userDAO = new UserManagementDAO();
 
 	public static boolean loginValidation(String email, String userPassword) {
 		boolean valid = false;
 		// Condition for name and password validation
 		if (UserValidation.emailValidation(email) && UserValidation.passwordValidation(userPassword)) {
-			try {
-				valid = UserManagementDAO.login(email, userPassword);
-			} catch (SQLException e) {
-				// Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			valid = userDAO.login(email, userPassword);
+
 		} else {
 			throw new ValidException("Enter your registered details");
 		}
@@ -49,7 +47,7 @@ public class UserManagement {
 		// Condition for valid details
 		if (UserValidation.isValidUser(user)) {
 			try {
-				register = UserManagementDAO.register(user);
+				register = userDAO.register(user);
 			} catch (SQLException e) {
 				// Auto-generated catch block
 				e.printStackTrace();
@@ -72,7 +70,7 @@ public class UserManagement {
 		List<User> display = null;
 		try {
 			if (UserValidation.emailValidation(email)) {
-				display = UserManagementDAO.getUsers(email);
+				display = userDAO.getUsers(email);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// Auto-generated catch block
@@ -80,5 +78,29 @@ public class UserManagement {
 
 		}
 		return display;
+	}
+
+	public static boolean accountStatus(int accno, boolean status) {
+		boolean isValid = false;
+
+		if (accno > 0) {
+
+			isValid = true;
+			userDAO.status(accno, status);
+		}
+		return isValid;
+	}
+
+	public static int getAccNo(String email) {
+		int accNo = 0;
+		try {
+			if (UserValidation.emailValidation(email)) {
+				accNo = userDAO.getAccountNo(email);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
+		}
+		return accNo;
 	}
 }
