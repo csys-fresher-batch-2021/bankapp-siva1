@@ -1,48 +1,29 @@
 package in.siva.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import in.siva.connectionutil.ConnectionUtil;
+import in.siva.exception.ValidException;
 import in.siva.model.User;
 
-
 public class UserManagementDAO {
-	private UserManagementDAO() {
-		// Default Constructor
-	}
 
-	private static final List<User> userList = new ArrayList<>();// created ArrayList
-	// Details of user
-	static {
-		User user1 = new User();
-		user1.setAccNo(100000001l);
-		user1.setName("Siva");
-		user1.setEmail("vishvajith257@gmail.com");
-		user1.setPassword("Siva@123");
-		user1.setMobileNo(9789231919l);
-		user1.setAddress("Palayamkottai");
-		user1.setBalance(50000);
-		userList.add(user1);
+	private static UserManagementDAO instance = new UserManagementDAO();
 
-		User user2 = new User();
-		user2.setAccNo(100000002l);
-		user2.setName("Ramesh");
-		user2.setEmail("gururam12@gmail.com");
-		user2.setPassword("Gkram@123");
-		user2.setAddress("Chennai");
-		user2.setMobileNo(9361363167l);
-		user2.setBalance(25000);
-
-		userList.add(user2);
-	}
-
-	public static List<User> getList() {
-		return userList;
+	/**
+	 * This method used to get instance of the UsermanagementDAO
+	 * 
+	 * @return UserManagementDAO
+	 */
+	public static UserManagementDAO getInstance() {
+		return instance;
 	}
 
 	/**
@@ -54,7 +35,7 @@ public class UserManagementDAO {
 	 * @throws SQLException
 	 */
 
-	public static boolean login(String email, String password) throws SQLException {
+	public boolean login(String email, String password){
 		PreparedStatement pst = null;
 		Connection connection = null;
 		ResultSet rs = null;
@@ -76,19 +57,7 @@ public class UserManagementDAO {
 			e.printStackTrace();
 		} finally {
 
-			if (pst != null) {
-
-				pst.close();
-			}
-
-			if (connection != null) {
-
-				connection.close();
-
-			}
-			if (rs != null) {
-				rs.close();
-			}
+			ConnectionUtil.close(rs, pst, connection);
 		}
 
 		return valid;
@@ -101,7 +70,7 @@ public class UserManagementDAO {
 	 * @throws SQLException
 	 */
 
-	public static boolean register(User user) throws SQLException {
+	public boolean register(User user) throws SQLException {
 
 		boolean register = false;
 		Connection connection = null;
@@ -113,7 +82,7 @@ public class UserManagementDAO {
 
 			// Query
 			if (connection != null) {
-				String sql = "insert into bank_userdetails(name,password,email,address,balance,mobileno)values(?,?,?,?,?,?)";
+				String sql = "insert into bank_userdetails(name,password,email,address,balance,mobileno,created_date)values(?,?,?,?,?,?,?)";
 
 				// Execute
 				pst = connection.prepareStatement(sql);
@@ -123,7 +92,7 @@ public class UserManagementDAO {
 				pst.setString(4, user.getAddress());
 				pst.setFloat(5, user.getBalance());
 				pst.setLong(6, user.getMobileNo());
-
+				pst.setDate(7, user.getCreated_date());
 				pst.executeUpdate();
 				register = true;
 			}
@@ -132,16 +101,7 @@ public class UserManagementDAO {
 			e.printStackTrace();
 		} finally {
 
-			if (pst != null) {
-
-				pst.close();
-
-			}
-			if (connection != null) {
-
-				connection.close();
-
-			}
+			ConnectionUtil.closed(connection, pst);
 		}
 
 		return register;
@@ -154,91 +114,92 @@ public class UserManagementDAO {
 	 * @return
 	 */
 
-	public static List<User> getUsers(String email) throws ClassNotFoundException, SQLException {
+	public List<User> getUsers(String email) throws ClassNotFoundException, SQLException {
 		List<User> list = new ArrayList<>();
 
-		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select name,email,address,balance,mobileno,accno from bank_userdetails where email=? ";
-		PreparedStatement pst = connection.prepareStatement(sql);
-		pst.setString(1, email);
-		ResultSet rs = pst.executeQuery();
-		while (rs.next()) {
-			User user = new User();
-			String name = rs.getString(1);
-			String emailId = rs.getString(2);
-			String address = rs.getString(3);
-			float balance = rs.getFloat(4);
-			long mobileno = rs.getLong(5);
-			int accno = rs.getInt(6);
-			user.setName(name);
-			user.setEmail(emailId);
-			user.setAddress(address);
-			user.setBalance(balance);
-			user.setMobileNo(mobileno);
-			user.setAccNo(accno);
-
-			list.add(user);
-		}
-
-		ConnectionUtil.close(rs, pst, connection);
-		return list;
-		
-	}
-
-	/**
-	 * Deposit an Amount for User account
-	 * 
-	 * @param name   // name of user
-	 * @param amount // amount to deposit
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-
-	public static double deposit(String email, double amount) throws ClassNotFoundException, SQLException {
-		double accountBalance = 0;
-		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select balance from bank_userdetails where email = ?";
-		PreparedStatement pst = connection.prepareStatement(sql);
-		pst.setString(1, email);
-		ResultSet rs = pst.executeQuery();
-		while (rs.next()) {
-			float balance = rs.getFloat(1);
-			accountBalance = balance + amount;
-		}
-
-		ConnectionUtil.close(rs, pst, connection);
-
-		return accountBalance;
-	}
-
-	/**
-	 * Withdraw money from account
-	 * 
-	 * @param name   // name of user
-	 * @param amount // amount withdraw by user
-	 * @return
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-
-	public static double withdraw(String email, double amount) throws ClassNotFoundException, SQLException {
-		double accountBalance = 0;
-
-		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select balance from bank_userdetails where email = ?";
-		PreparedStatement pst = connection.prepareStatement(sql);
-		pst.setString(1, email);
-		ResultSet rs = pst.executeQuery();
-		while (rs.next()) {
-			float balance = rs.getFloat(1);
-			if (balance > amount && amount > 0) {
-				accountBalance = balance - amount;
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionUtil.getConnection();
+			String sql = "select name,email,address,balance,mobileno,accno,created_date,active from bank_userdetails where email=? ";
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, email);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				User user = new User();
+				String name = rs.getString(1);
+				String emailId = rs.getString(2);
+				String address = rs.getString(3);
+				float balance = rs.getFloat(4);
+				long mobileno = rs.getLong(5);
+				int accno = rs.getInt(6);
+				Date date = rs.getDate(7);
+				boolean active = rs.getBoolean(8);
+				user.setName(name);
+				user.setEmail(emailId);
+				user.setAddress(address);
+				user.setBalance(balance);
+				user.setMobileNo(mobileno);
+				user.setAccNo(accno);
+				user.setCreated_date(date);
+				user.setActive(active);
+				list.add(user);
 			}
-		}
-		ConnectionUtil.close(rs, pst, connection);
+		} catch (ClassNotFoundException | SQLException e) {
 
-		return accountBalance;
+			e.printStackTrace();
+		} finally {
+			ConnectionUtil.close(rs, pst, connection);
+		}
+		return list;
+
 	}
 
+	public void status(int accNo, boolean status){
+
+		Connection connection = null;
+		PreparedStatement pst = null;
+
+		try {
+			connection = ConnectionUtil.getConnection();
+			String sql = "update bank_userdetails set active= ? where accno = ?";
+			pst = connection.prepareStatement(sql);
+			pst.setBoolean(1, status);
+			pst.setInt(2, accNo);
+			pst.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			ConnectionUtil.closed(connection, pst);
+		}
+	}
+
+	public int getAccountNo(String email) throws ClassNotFoundException, SQLException {
+
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionUtil.getConnection();
+			String sql = "select accno from bank_userdetails where email = ?";
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, email);
+			rs = pst.executeQuery();
+			int accno = 0;
+			if (rs.next()) {
+
+				accno = rs.getInt("accno");
+			}
+			return accno;
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			throw new ValidException("Invalid Account Number");
+
+		} finally {
+			ConnectionUtil.close(rs, pst, connection);
+		}
+	}
 
 }

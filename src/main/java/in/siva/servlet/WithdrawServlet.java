@@ -2,7 +2,7 @@ package in.siva.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import in.siva.exception.ValidException;
+
 import in.siva.service.TransactionManagement;
+
 import in.siva.util.NumberValidator;
 
 /**
@@ -31,15 +33,17 @@ public class WithdrawServlet extends HttpServlet {
 
 		try {
 			HttpSession session = request.getSession();
-			String email = (String) session.getAttribute("LOGGED_IN_USER");
-
+			
+			int accountNo = (Integer)session.getAttribute("ACCOUNTNUMBER");
+			String accno = request.getParameter("accno");
 			String price = request.getParameter("amount");
 			float amount = 0;
-
+			int accNo = 0;
+			accNo = NumberValidator.parseInteger(accno, "Invalid Account Number");
 			amount = NumberValidator.parseFloat(price, "Invalid amount");
-			double balance = TransactionManagement.withdrawAmount(email, amount);
-
-			if (balance != 0) {
+			double balance = TransactionManagement.withdrawAmount(accountNo, amount);
+					
+			if (balance > 0 && accountNo ==accNo) {
 
 				String message = "Withdraw Success ";
 				request.setAttribute(price, message);

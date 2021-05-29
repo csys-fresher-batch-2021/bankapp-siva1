@@ -26,17 +26,17 @@ public class DisplayServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// HttpSession session = request.getSession();
+		
 		String email = request.getParameter("userId");
 
 		List<User> list = UserManagement.getAllUser(email);
 		// Step 2: Convert to Json string
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
-		System.out.println("Approach #2: GSON JAR \n" + json);
 		// Step 3: Write the json in response and flush it
 		PrintWriter out = response.getWriter();
 		out.print(json);

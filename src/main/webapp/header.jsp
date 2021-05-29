@@ -3,7 +3,8 @@
 <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <%
-String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");%>
+String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");
+%>
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Bank APP</a>

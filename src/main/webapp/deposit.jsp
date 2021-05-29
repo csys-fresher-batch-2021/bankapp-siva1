@@ -11,16 +11,20 @@
 
 		<form id="depositForm" action="DepositServlet" method="get" 
 			novalidate="novalidate" onsubmit="deposit()">
-
+			<div class="mb-2 col-4">
+			<label> Account Number</label>
+			<input type = "number" name = "accno" id="accno" min="1" placeholder="Enter Account Number" required autofocus>
+			<div class="invalid-feedback">Please Enter your Account Number</div>
+			</div>
 			<div class="mb-2 col-4">
 				<label>Enter Amount To Deposit</label> <input type="number"
 					name="amount" id="amount" min="100" class="form-control"
-					placeholder="Enter Amount Here" required autofocus><br />
+					placeholder="Enter Amount Here" required ><br />
 				<div class="invalid-feedback">Please Enter an amount</div>
 
 			</div>
 			<div class="mb-3 col-4">
-				<button class="btn btn-primary">Enter</button>
+				<button class="btn btn-primary">Deposit</button>
 			</div>
 			<br />
 
