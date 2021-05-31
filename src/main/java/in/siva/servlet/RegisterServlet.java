@@ -59,13 +59,13 @@ public class RegisterServlet extends HttpServlet {
 				response.sendRedirect("login.jsp?infoMessage=" + message);
 
 			} else {
-				String message = "!!Invalid Login Credentials!!";
+				String message = "!!Invalid Registration Credentials!!";
 				response.sendRedirect("registration.jsp?errorMessage=" + message);
 
 			}
 		} catch (ValidException e) {
 			e.printStackTrace();
-			String message = "!!Invalid Login Credentials!!";
+			String message = "!!Invalid Registration Credentials!!";
 			response.sendRedirect("registration.jsp?errorMessage=" + message);
 		}
 

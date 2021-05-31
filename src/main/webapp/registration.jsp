@@ -33,7 +33,7 @@
 			</div>
 			<div class="mb-2 col-4">
 			<label>Password</label>
-			<input type="password" id="userpassword" name="userpassword" placeholder="Enter Password" class="form-control" required><br />
+			<input type="password" id="userpassword" name="userpassword" placeholder="Enter Password" class="form-control" required><p>Password should include 8 character with at least one uppercase,special character and numerical<br />
 			<div class="invalid-feedback">Please Enter a Password.</div>
 			</div>
 			<label>Gender  </label>

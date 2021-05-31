@@ -46,16 +46,16 @@ public class DepositServlet extends HttpServlet {
 			if (balance > 0 &&accountNo ==accNo) {
 
 				String message = "Deposit Success ";
-				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
+				response.sendRedirect("summary.jsp?Balance=" + balance + "&infoMessage=" + message);
 			} 
 			else
 			{
 				String message = "Deposit failed";
-				response.sendRedirect("deposit.jsp?errormessage=" + message);
+				response.sendRedirect("deposit.jsp?errorMessage=" + message);
 			}
-		} catch (ValidException | IOException e) {
+		} catch (ValidException  e) {
 			String message = "Deposit failed";
-			response.sendRedirect("deposit.jsp?errormessage=" + message);
+			response.sendRedirect("deposit.jsp?errorMessage=" + message);
 
 		}
 

@@ -27,6 +27,9 @@ public class User {
 	private String address;
 	private long mobileNo;
 	private long accNo;
+	private Date created_date;
+	private float balance;
+
 	public boolean isActive() {
 		return active;
 	}
@@ -44,9 +47,7 @@ public class User {
 		this.created_date = date;
 	}
 
-	private Date created_date;
-	private float balance;
-
+	
 	public String getName() {
 		return name;
 	}

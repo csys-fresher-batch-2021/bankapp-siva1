@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import in.siva.connectionutil.ConnectionUtil;
+import in.siva.exception.DBException;
 
 public class TransactionDAO {
 
@@ -47,8 +48,9 @@ public class TransactionDAO {
 				accountBalance = balance + amount;
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-
 			e.printStackTrace();
+			throw new DBException("Unable to Deposit");
+			
 		} finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}
@@ -56,6 +58,14 @@ public class TransactionDAO {
 		return accountBalance;
 	}
 
+	/**
+	 * Transfer fund from own account to another
+	 * @param fromAccNo
+	 * @param toAccNo
+	 * @param amount
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public void fundTransfer(int fromAccNo, int toAccNo, float amount) throws ClassNotFoundException, SQLException {
 		withdraw(fromAccNo, amount);
 		deposit(toAccNo, amount);
@@ -92,6 +102,7 @@ public class TransactionDAO {
 		} catch (ClassNotFoundException | SQLException e) {
 
 			e.printStackTrace();
+			throw new DBException("Unable to Withdraw");
 		} finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}

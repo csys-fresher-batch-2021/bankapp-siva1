@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.siva.connectionutil.ConnectionUtil;
-import in.siva.exception.ValidException;
+import in.siva.exception.DBException;
+
 import in.siva.model.User;
 
 public class UserManagementDAO {
@@ -35,7 +36,7 @@ public class UserManagementDAO {
 	 * @throws SQLException
 	 */
 
-	public boolean login(String email, String password){
+	public boolean login(String email, String password)throws SQLException{
 		PreparedStatement pst = null;
 		Connection connection = null;
 		ResultSet rs = null;
@@ -53,8 +54,8 @@ public class UserManagementDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			// Auto-generated catch block
 			e.printStackTrace();
+			throw new DBException("Unable to Login");
 		} finally {
 
 			ConnectionUtil.close(rs, pst, connection);
@@ -97,8 +98,9 @@ public class UserManagementDAO {
 				register = true;
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			// Auto-generated catch block
+			
 			e.printStackTrace();
+			throw new DBException("Unable to Register");
 		} finally {
 
 			ConnectionUtil.closed(connection, pst);
@@ -149,6 +151,7 @@ public class UserManagementDAO {
 		} catch (ClassNotFoundException | SQLException e) {
 
 			e.printStackTrace();
+			throw new DBException("Unable to List User Details");
 		} finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}
@@ -171,6 +174,7 @@ public class UserManagementDAO {
 		} catch (ClassNotFoundException | SQLException e) {
 
 			e.printStackTrace();
+			throw new DBException("Unable to View the Status");
 		} finally {
 			ConnectionUtil.closed(connection, pst);
 		}
@@ -195,7 +199,7 @@ public class UserManagementDAO {
 			return accno;
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new ValidException("Invalid Account Number");
+			throw new DBException("Invalid Account Number");
 
 		} finally {
 			ConnectionUtil.close(rs, pst, connection);

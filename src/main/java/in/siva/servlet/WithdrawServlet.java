@@ -47,15 +47,15 @@ public class WithdrawServlet extends HttpServlet {
 
 				String message = "Withdraw Success ";
 				request.setAttribute(price, message);
-				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
+				response.sendRedirect("summary.jsp?Balance=" + balance + "&infoMessage=" + message);
 				 		
 			} else {
 				String message = "Withdrawal failed";
-				response.sendRedirect("withdraw.jsp?errormessage=" + message);
+				response.sendRedirect("withdraw.jsp?errorMessage=" + message);
 			}
 		} catch (ValidException e) {
 			String message = "Withdrawal failed";
-			response.sendRedirect("withdraw.jsp?errormessage=" + message);
+			response.sendRedirect("withdraw.jsp?errorMessage=" + message);
 		}
 	}
 

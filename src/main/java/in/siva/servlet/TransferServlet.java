@@ -49,13 +49,13 @@ public class TransferServlet extends HttpServlet {
 				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
 			} else {
 				String message = "Transfer Fund Failure";
-				response.sendRedirect("transferamount.jsp?errormessage=" + message);
+				response.sendRedirect("transferamount.jsp?errorMessage=" + message);
 			}
 
 		} catch (IOException e) {
 
 			String message = "Transfer Fund Failure";
-			response.sendRedirect("transferamount.jsp?errormessage=" + message);
+			response.sendRedirect("transferamount.jsp?errorMessage=" + message);
 			e.printStackTrace();
 		}
 	}
