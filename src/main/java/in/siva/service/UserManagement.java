@@ -1,7 +1,7 @@
 package in.siva.service;
 
 import java.sql.SQLException;
-import java.util.List;
+
 
 import in.siva.dao.UserManagementDAO;
 
@@ -70,12 +70,12 @@ public class UserManagement {
 	 * @param name //name of user
 	 * @return
 	 */
-	public static List<User> getAllUser(String email) {
+	public static User getUser(int accNo) {
 
-		List<User> display = null;
+		User display = null;
 		try {
-			if (UserValidation.emailValidation(email)) {
-				display = userDAO.getUsers(email);
+			if (UserValidation.isValidAccount(accNo)) {
+				display = userDAO.getUsers(accNo);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 

@@ -20,7 +20,7 @@
 			</div>
 			<div class="mb-2 col-4">
 				<label>Enter Amount To Deposit</label> <input type="number"
-					name="amount" id="amount" min="100" class="form-control"
+					name="amount" id="amount" min="100" max="100000" class="form-control"
 					placeholder="Enter Amount Here" required autofocus><br />
 				<div class="invalid-feedback">Please Enter an amount</div>
 

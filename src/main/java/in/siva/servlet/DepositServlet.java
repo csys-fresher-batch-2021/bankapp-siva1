@@ -23,12 +23,14 @@ public class DepositServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * @throws IOException 
+	 * @throws ServletException 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+			{
 
 		try {
 			String price = request.getParameter("amount");
@@ -49,8 +51,7 @@ public class DepositServlet extends HttpServlet {
 			}
 		} catch (ValidException e) {
 			e.printStackTrace();
-			String message = "Deposit failed";
-			response.sendRedirect("deposit.jsp?errorMessage=" + message);
+			response.sendRedirect("deposit.jsp?errorMessage=" + e.getMessage());
 			
 		}
 

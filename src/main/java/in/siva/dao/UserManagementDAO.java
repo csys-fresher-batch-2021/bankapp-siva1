@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import in.siva.connectionutil.ConnectionUtil;
 import in.siva.exception.DBException;
@@ -36,7 +34,7 @@ public class UserManagementDAO {
 	 * @throws SQLException
 	 */
 
-	public boolean login(String email, String password)throws SQLException{
+	public boolean login(String email, String password) throws SQLException {
 		PreparedStatement pst = null;
 		Connection connection = null;
 		ResultSet rs = null;
@@ -99,7 +97,7 @@ public class UserManagementDAO {
 				register = true;
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			
+
 			e.printStackTrace();
 			throw new DBException("Unable to Register");
 		} finally {
@@ -117,20 +115,20 @@ public class UserManagementDAO {
 	 * @return
 	 */
 
-	public List<User> getUsers(String email) throws ClassNotFoundException, SQLException {
-		List<User> list = new ArrayList<>();
+	public User getUsers(int accNo) throws ClassNotFoundException, SQLException {
+		User user = null;
 
 		Connection connection = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select name,email,address,balance,mobileno,accno,created_date,active from bank_userdetails where email=? ";
+			String sql = "select name,email,address,balance,mobileno,accno,created_date,active from bank_userdetails where accNo=? ";
 			pst = connection.prepareStatement(sql);
-			pst.setString(1, email);
+			pst.setInt(1, accNo);
 			rs = pst.executeQuery();
-			while (rs.next()) {
-				User user = new User();
+			if (rs.next()) {
+				user = new User();
 				String name = rs.getString(1);
 				String emailId = rs.getString(2);
 				String address = rs.getString(3);
@@ -148,7 +146,7 @@ public class UserManagementDAO {
 				user.setAccNo(accno);
 				user.setCreatedDate(dateTime);
 				user.setActive(active);
-				list.add(user);
+
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 
@@ -157,11 +155,11 @@ public class UserManagementDAO {
 		} finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}
-		return list;
+		return user;
 
 	}
 
-	public void status(int accNo, boolean status){
+	public void status(int accNo, boolean status) {
 
 		Connection connection = null;
 		PreparedStatement pst = null;

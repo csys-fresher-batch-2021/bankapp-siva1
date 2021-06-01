@@ -52,9 +52,9 @@ public class TransferServlet extends HttpServlet {
 
 		} catch (ValidException e) {
 
-			String message = "Transfer Fund Failure";
-			response.sendRedirect("transferamount.jsp?errorMessage=" + message);
 			e.printStackTrace();
+			response.sendRedirect("transferamount.jsp?errorMessage=" + e.getMessage());
+			
 		}
 	}
 

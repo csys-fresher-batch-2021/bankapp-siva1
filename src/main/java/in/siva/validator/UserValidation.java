@@ -107,6 +107,18 @@ public class UserValidation {
 		}
 		return valid;
 	}
+	/**
+	 * To validate user account number 
+	 * @param accNo
+	 * @return
+	 */
+	public static boolean isValidAccount(int accNo) {
+		boolean valid = false;
+		if (accNo > 0) {
+			valid = true;
+		}
+		return valid;
+	}
 
 	/**
 	 * To validate user details

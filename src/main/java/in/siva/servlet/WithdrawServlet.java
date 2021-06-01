@@ -51,8 +51,8 @@ public class WithdrawServlet extends HttpServlet {
 				response.sendRedirect("withdraw.jsp?errorMessage=" + message);
 			}
 		} catch (ValidException e) {
-			String message = "Withdrawal failed";
-			response.sendRedirect("withdraw.jsp?errorMessage=" + message);
+			e.printStackTrace();
+			response.sendRedirect("withdraw.jsp?errorMessage=" +e.getMessage());
 		}
 	}
 

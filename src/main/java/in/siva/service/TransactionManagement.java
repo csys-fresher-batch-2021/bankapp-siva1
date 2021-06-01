@@ -7,6 +7,7 @@ import in.siva.dao.UpdateDAO;
 
 import in.siva.exception.ValidException;
 
+import in.siva.validator.AmountValidator;
 import in.siva.validator.UserValidation;
 
 public class TransactionManagement {
@@ -30,16 +31,18 @@ public class TransactionManagement {
 		// condition to validate accno and amount
 		try {
 
-			if (UserValidation.isValidAmount(amount) && transactionDAO.exists(accNo)) {
+			if (!UserValidation.isValidAmount(amount)) {
+				throw new ValidException("Invalid Amount");
+			}
+			if (!transactionDAO.exists(accNo)) {
+				throw new ValidException("Invalid  Account Number");
+			}
 
 				balance = transactionDAO.deposit(accNo, amount);
 				updateDAO.updateBalance(accNo, amount, "DEPOSIT");
 
-			}
-
-			else {
-				throw new ValidException("Enter a valid details");
-			}
+			
+			
 		} catch (ClassNotFoundException | SQLException e) {
 
 			e.printStackTrace();
@@ -60,14 +63,19 @@ public class TransactionManagement {
 		// condition to validate email and amount
 
 		try {
-			if (UserValidation.isValidAmount(amount) && transactionDAO.exists(accNo)) {
 
-				balance = transactionDAO.withdraw(accNo, amount);
-				updateDAO.updateBalance(accNo, amount, "WITHDRAW");
-
-			} else {
-				throw new ValidException("Enter  valid details");
+			if (!UserValidation.isValidAmount(amount)) {
+				throw new ValidException("Invalid Amount");
 			}
+			if (AmountValidator.isSufficientAmount(accNo, amount)) {
+				throw new ValidException("InSufficient Balance in Your Account");
+			}
+			if (!transactionDAO.exists(accNo)) {
+				throw new ValidException("Invalid Account Number");
+			}
+			balance = transactionDAO.withdraw(accNo, amount);
+			updateDAO.updateBalance(accNo, amount, "WITHDRAW");
+
 		} catch (ClassNotFoundException | SQLException e) {
 
 			e.printStackTrace();
@@ -78,15 +86,21 @@ public class TransactionManagement {
 	public static void transferAmount(int senderAccNo, int receiverAccNo, float amount) {
 
 		try {
-			if (UserValidation.isValidAmount(amount) && transactionDAO.exists(senderAccNo)
-					&& transactionDAO.exists(receiverAccNo)) {
-
-				transactionDAO.fundTransfer(senderAccNo, receiverAccNo, amount);
-				updateDAO.updateBalance(receiverAccNo, amount, "DEPOSIT");
-			} else {
-
-				throw new ValidException("Enter valid details");
+			if (!UserValidation.isValidAmount(amount)) {
+				throw new ValidException("Invalid Amount");
 			}
+			if (AmountValidator.isSufficientAmount(senderAccNo, amount)) {
+				throw new ValidException("InSufficient Balance in Your Account");
+			}
+			if (!transactionDAO.exists(receiverAccNo)) {
+				throw new ValidException("Invalid Receiver Account Number");
+			}
+			if (!transactionDAO.exists(senderAccNo)) {
+				throw new ValidException("Invalid Account Number");
+			}
+			transactionDAO.fundTransfer(senderAccNo, receiverAccNo, amount);
+			updateDAO.updateBalance(receiverAccNo, amount, "DEPOSIT");
+
 		} catch (ClassNotFoundException | SQLException e) {
 
 			e.printStackTrace();

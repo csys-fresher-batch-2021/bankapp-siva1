@@ -49,12 +49,12 @@
 	} 
 	function getAllDetails(){
 	
-	let url = "DisplayServlet?userId=<%=(String) session.getAttribute("LOGGED_IN_USER")%>";
+	let url = "DisplayServlet?userId=<%=(Integer)session.getAttribute("ACCOUNTNUMBER")%>";
 	fetch(url).then(res=>res.json()).then(res=>{
 		
-		let users = res;		
+		let user = res;		
 		let details = "";
-		for(let user of users){
+		
 			
 			details += "<tr><td>" +user.name+ "</td>"+
 			"<td>" + user.accNo + "</td>"+
@@ -74,7 +74,7 @@
 			}
 
  
-		}
+		
 		
 		document.querySelector("#userlist").innerHTML = details;
 	})
