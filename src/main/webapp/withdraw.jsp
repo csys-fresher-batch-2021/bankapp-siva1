@@ -7,14 +7,13 @@
 	<jsp:include page="message.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>Withdrawal Page</h3>
-
+<% Integer accountNumber = (Integer)session.getAttribute("ACCOUNTNUMBER"); %>
+	
 		<form id="withdrawForm" action="WithdrawServlet" method="get"
 			onsubmit="withdraw()" novalidate="novalidate">
 			<div class="mb-2 col-4">
 				<label> Account Number</label> <input type="number" name="accno"
-					id="accno" min="1" placeholder="Enter Account Number" required
-					autofocus>
-				<div class="invalid-feedback">Please Enter your Account Number</div>
+					id="accno" value=<%=accountNumber %> readonly>
 			</div>
 			<div class="mb-2 col-4">
 				<label>Enter Amount To Withdraw</label> <input type="number"

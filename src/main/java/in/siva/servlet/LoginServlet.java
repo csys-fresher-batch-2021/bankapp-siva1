@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import in.siva.exception.ValidException;
 import in.siva.service.UserManagement;
 
 /**
@@ -26,24 +27,31 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		try {
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
 
-		boolean valid = UserManagement.loginValidation(email, password);// Validating the UserName and Password
-		// Condition for valid Login
-		if (valid) {
-			HttpSession session = request.getSession(); // Creating a Session
-			session.setAttribute("LOGGED_IN_USER", email);
-			int accNo = UserManagement.getAccNo(email);
-			session.setAttribute("ACCOUNTNUMBER", accNo);
-			// Setting username in session
-			String message = "Successfully logged in";
-			response.sendRedirect("display.jsp?infoMessage=" + message);
+			boolean valid = UserManagement.loginValidation(email, password);// Validating the UserName and Password
+			// Condition for valid Login
+			if (valid) {
+				HttpSession session = request.getSession(); // Creating a Session
+				session.setAttribute("LOGGED_IN_USER", email);
+				int accNo = UserManagement.getAccNo(email);
+				session.setAttribute("ACCOUNTNUMBER", accNo);
+				// Setting username in session
+				String message = "Successfully logged in";
+				response.sendRedirect("display.jsp?infoMessage=" + message);
 
-		} else {
+			} else {
 
+				String message = "Invalid Login Credentials";
+				response.sendRedirect("login.jsp?errorMessage=" + message);
+			}
+		} catch (ValidException e) {
+			
 			String message = "Invalid Login Credentials";
 			response.sendRedirect("login.jsp?errorMessage=" + message);
+			e.printStackTrace();
 		}
 
 	}

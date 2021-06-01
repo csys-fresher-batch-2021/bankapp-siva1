@@ -1,6 +1,7 @@
 package in.siva.model;
 
-import java.sql.Date;
+
+import java.time.LocalDateTime;
 
 
 public class User {
@@ -27,6 +28,14 @@ public class User {
 	private String address;
 	private long mobileNo;
 	private long accNo;
+	public User(LocalDateTime createdDate) {
+		super();
+		this.createdDate = createdDate;
+	}
+
+	private LocalDateTime createdDate;
+	private float balance;
+	private boolean active;
 	public boolean isActive() {
 		return active;
 	}
@@ -35,18 +44,15 @@ public class User {
 		this.active = active;
 	}
 
-	private boolean active;
-	public Date getCreated_date() {
-		return created_date;
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setCreated_date(Date date) {
-		this.created_date = date;
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
 	}
-
-	private Date created_date;
-	private float balance;
-
+	
 	public String getName() {
 		return name;
 	}
@@ -70,7 +76,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [name=" + name + ", email=" + email + ", password=" + password + ", address=" + address
-				+ ", mobileNo=" + mobileNo + ", accNo=" + accNo + ", created_date=" + created_date + ", balance="
+				+ ", mobileNo=" + mobileNo + ", accNo=" + accNo + ", createdDate=" + createdDate + ", balance="
 				+ balance + "]";
 	}
 

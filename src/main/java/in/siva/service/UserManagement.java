@@ -1,9 +1,10 @@
 package in.siva.service;
 
 import java.sql.SQLException;
-import java.util.List;
+
 
 import in.siva.dao.UserManagementDAO;
+
 import in.siva.exception.ValidException;
 import in.siva.model.User;
 import in.siva.validator.UserValidation;
@@ -25,13 +26,17 @@ public class UserManagement {
 
 	public static boolean loginValidation(String email, String userPassword) {
 		boolean valid = false;
-		// Condition for name and password validation
 		if (UserValidation.emailValidation(email) && UserValidation.passwordValidation(userPassword)) {
 
-			valid = userDAO.login(email, userPassword);
+			try {
+				valid = userDAO.login(email, userPassword);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
 
 		} else {
-			throw new ValidException("Enter your registered details");
+			throw new ValidException("Invalid User Details");
 		}
 
 		return valid;
@@ -53,7 +58,7 @@ public class UserManagement {
 				e.printStackTrace();
 			}
 		} else {
-			throw new ValidException("Give correct details");
+			throw new ValidException("Invalid Details");
 		}
 		return register;
 
@@ -65,16 +70,17 @@ public class UserManagement {
 	 * @param name //name of user
 	 * @return
 	 */
-	public static List<User> getAllUser(String email) {
+	public static User getUser(int accNo) {
 
-		List<User> display = null;
+		User display = null;
 		try {
-			if (UserValidation.emailValidation(email)) {
-				display = userDAO.getUsers(email);
+			if (UserValidation.isValidAccount(accNo)) {
+				display = userDAO.getUsers(accNo);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			// Auto-generated catch block
+
 			e.printStackTrace();
+			throw new ValidException("Unable to fetch details");
 
 		}
 		return display;
@@ -83,10 +89,16 @@ public class UserManagement {
 	public static boolean accountStatus(int accno, boolean status) {
 		boolean isValid = false;
 
-		if (accno > 0) {
+		try {
+			if (accno > 0) {
 
-			isValid = true;
-			userDAO.status(accno, status);
+				isValid = true;
+				userDAO.status(accno, status);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw new ValidException("Unable to fetch status");
 		}
 		return isValid;
 	}
@@ -100,6 +112,7 @@ public class UserManagement {
 		} catch (ClassNotFoundException | SQLException e) {
 
 			e.printStackTrace();
+			throw new ValidException("Unable to get Account Number");
 		}
 		return accNo;
 	}

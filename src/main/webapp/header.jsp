@@ -17,9 +17,7 @@ String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");
       <li class="nav-item active">
         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
+     
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
         <div class="dropdown-menu" aria-labelledby="dropdownId">
@@ -34,14 +32,20 @@ String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");
       <li class="nav-item active">
         <a class="nav-link" href="login.jsp">Login</a>
       </li>
+       
       <li class="nav-item">
         <a class="nav-link" href="registration.jsp">Register</a>
 
       </li>
       <%} else { %>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="display.jsp">Accounts</a>
+      </li>
         <li class="nav-item">
         <a class="nav-link" href="#">Welcome <%=loggedInUsername %></a>
      	 </li>
+     	 
 		<li class="nav-item">
         <a class="nav-link" href="LogoutServlet">Logout</a>
       </li>

@@ -21,7 +21,7 @@ public class UserValidation {
 
 		boolean valid = false;
 		// Name Pattern Declaration
-		String regx = "^[A-Z]\\w{4,29}$";
+		String regx = "^[a-zA-Z\\s]+\\w{4,29}$";
 
 		if (name != null) {
 			Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);// Compiles the given pattern
@@ -103,6 +103,18 @@ public class UserValidation {
 	public static boolean isValidAmount(float amount) {
 		boolean valid = false;
 		if (amount > 0) {
+			valid = true;
+		}
+		return valid;
+	}
+	/**
+	 * To validate user account number 
+	 * @param accNo
+	 * @return
+	 */
+	public static boolean isValidAccount(int accNo) {
+		boolean valid = false;
+		if (accNo > 0) {
 			valid = true;
 		}
 		return valid;

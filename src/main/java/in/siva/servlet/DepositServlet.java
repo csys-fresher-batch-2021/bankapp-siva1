@@ -23,40 +23,36 @@ public class DepositServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * @throws IOException 
+	 * @throws ServletException 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+			{
 
 		try {
 			String price = request.getParameter("amount");
-			String accno = request.getParameter("accno");
+
 			HttpSession session = request.getSession();
-			
-			int accountNo = (Integer)session.getAttribute("ACCOUNTNUMBER"); 
+			int accountNo = (Integer) session.getAttribute("ACCOUNTNUMBER");
 			float amount = 0;
-			int accNo = 0;
-			accNo = NumberValidator.parseInteger(accno, "Invalid Account Number");
 			amount = NumberValidator.parseFloat(price, "Invalid amount");
 			double balance = TransactionManagement.depositAmount(accountNo, amount);
-			
-			
-			if (balance > 0 &&accountNo ==accNo) {
+
+			if (balance > 0) {
 
 				String message = "Deposit Success ";
-				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
-			} 
-			else
-			{
+				response.sendRedirect("summary.jsp?Balance=" + balance + "&infoMessage=" + message);
+			} else {
 				String message = "Deposit failed";
-				response.sendRedirect("deposit.jsp?errormessage=" + message);
+				response.sendRedirect("deposit.jsp?errorMessage=" + message);
 			}
-		} catch (ValidException | IOException e) {
-			String message = "Deposit failed";
-			response.sendRedirect("deposit.jsp?errormessage=" + message);
-
+		} catch (ValidException e) {
+			e.printStackTrace();
+			response.sendRedirect("deposit.jsp?errorMessage=" + e.getMessage());
+			
 		}
 
 	}

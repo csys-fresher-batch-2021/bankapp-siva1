@@ -1,0 +1,13 @@
+create table bank_userdetails(
+name varchar(40) not null,
+password varchar(30) not null,
+email varchar(40) not null,
+address varchar(100) not null,
+mobileno bigint not null,
+balance float not null,
+created_date timestamp not null,
+active boolean default true,
+accno serial primary key);
+
+insert into bank_userdetails(name,password,email,addres,mobileno,balance,created_date)
+values('Surya','Surya@123','surya23@gmail.com','Tiruvannamalai',9789342848,3000,'2021-05-30');

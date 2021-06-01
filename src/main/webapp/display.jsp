@@ -22,39 +22,39 @@
 				<th scope="col">CreatedDate</th>
 				<th scope="col">AccountStatus</th>
 				<th scope="col">InactivateButton</th>
-				
-				</tr>
-				
+
+			</tr>
+
 		</thead>
 		<tbody id="userlist">
 		</tbody>
 
 
 	</table>
-<script>
+	<script>
 	
 	 function updateAccountDetails(accNo, status){
 		let url ="AccountStatusServlet?accno=" + accNo+"&status="+status;
 		fetch(url).then(res=>res.json()).then(res=>{
 			
-			let result = res.data;
-			console.log(res);
-			if(result == false){
-				alert("Failed");
+			let result = res;
+			
+			if(result ==true){
+				alert("Success");
 			}
 			else{
-				alert("Success");
+				alert("Failed");
 			}
 		})
 	} 
 	function getAllDetails(){
 	
-	let url = "DisplayServlet?userId=<%=(String) session.getAttribute("LOGGED_IN_USER")%>";
+	let url = "DisplayServlet?userId=<%=(Integer)session.getAttribute("ACCOUNTNUMBER")%>";
 	fetch(url).then(res=>res.json()).then(res=>{
 		
-		let users = res;		
+		let user = res;		
 		let details = "";
-		for(let user of users){
+		
 			
 			details += "<tr><td>" +user.name+ "</td>"+
 			"<td>" + user.accNo + "</td>"+
@@ -62,13 +62,11 @@
 			"<td>"+user.mobileNo+"</td>"+
 			"<td>"+user.address+"</td>"+
 			"<td>"+user.balance+"</td>"+
-			"<td>"+user.created_date+"</td>"+
+			"<td>"+user.createdDate+"</td>"+
 			"<td>"+user.active+"</td>";
 			if(user.active){
 			details+="<td><button type ='button'class='btn btn-danger' onclick=updateAccountDetails(" + user.accNo + ",false) >DeActivate</button></td></tr>";
-			details+="<tr><a href='deposit.jsp' class='btn btn-primary'>Deposit</a></tr>"+ "<tr><a href='withdraw.jsp' class='btn btn-primary'>Withdraw</a></tr>"+"<tr><a href='transferamount.jsp' class='btn btn-primary'>Transfer Amount</a></tr>";
-				
-			 
+			details+="<tr><a href='deposit.jsp' class='btn btn-primary'>Deposit</a></tr>"+ "<tr><a href='withdraw.jsp' class='btn btn-primary'>Withdraw</a></tr>"+"<tr><a href='transferamount.jsp' class='btn btn-primary'>Transfer Amount</a></tr>"; 
 			
 			}
 			else{
@@ -76,7 +74,7 @@
 			}
 
  
-		}
+		
 		
 		document.querySelector("#userlist").innerHTML = details;
 	})
