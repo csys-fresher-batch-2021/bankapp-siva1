@@ -1,11 +1,11 @@
 package in.siva.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +84,8 @@ public class UserManagementDAO {
 			// Query
 			if (connection != null) {
 				String sql = "insert into bank_userdetails(name,password,email,address,balance,mobileno,created_date)values(?,?,?,?,?,?,?)";
-
+				LocalDateTime dateTime = user.getCreatedDate();
+				Timestamp date = Timestamp.valueOf(dateTime);
 				// Execute
 				pst = connection.prepareStatement(sql);
 				pst.setString(1, user.getName());
@@ -93,7 +94,7 @@ public class UserManagementDAO {
 				pst.setString(4, user.getAddress());
 				pst.setFloat(5, user.getBalance());
 				pst.setLong(6, user.getMobileNo());
-				pst.setDate(7, user.getCreated_date());
+				pst.setTimestamp(7, date);
 				pst.executeUpdate();
 				register = true;
 			}
@@ -136,15 +137,16 @@ public class UserManagementDAO {
 				float balance = rs.getFloat(4);
 				long mobileno = rs.getLong(5);
 				int accno = rs.getInt(6);
-				Date date = rs.getDate(7);
+				Timestamp date = rs.getTimestamp(7);
 				boolean active = rs.getBoolean(8);
+				LocalDateTime dateTime = date.toLocalDateTime();
 				user.setName(name);
 				user.setEmail(emailId);
 				user.setAddress(address);
 				user.setBalance(balance);
 				user.setMobileNo(mobileno);
 				user.setAccNo(accno);
-				user.setCreated_date(date);
+				user.setCreatedDate(dateTime);
 				user.setActive(active);
 				list.add(user);
 			}

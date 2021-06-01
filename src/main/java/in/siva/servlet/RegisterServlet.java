@@ -1,8 +1,8 @@
 package in.siva.servlet;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
 			mobileNo = NumberValidator.parseLong(mobile, "Invalid Mobile Number");
 			float amount = 0;
 			amount = NumberValidator.parseFloat(price, "Invalid amount");
-			LocalDate date = LocalDate.now();
+			LocalDateTime date = LocalDateTime.now();
 			User user = new User();
 			user.setName(name);
 			user.setPassword(password);
@@ -49,8 +49,8 @@ public class RegisterServlet extends HttpServlet {
 			user.setAddress(address);
 			user.setBalance(amount);
 			user.setEmail(email);
-			user.setCreated_date(Date.valueOf(date));
-			
+			user.setCreatedDate(date);
+
 			boolean valid = UserManagement.registerDetails(user);// validating the details
 			// condition for valid details
 			if (valid) {

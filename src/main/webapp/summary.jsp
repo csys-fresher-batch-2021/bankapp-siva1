@@ -22,7 +22,7 @@
 
 					<%
 					String amount = request.getParameter("Balance");
-					String result = request.getParameter("infomessage");
+					String result = request.getParameter("infoMessage");
 					LocalDate date = LocalDate.now();
 					LocalTime time = LocalTime.now();
 					%>

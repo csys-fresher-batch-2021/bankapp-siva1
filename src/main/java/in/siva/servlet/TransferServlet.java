@@ -7,8 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import in.siva.exception.ValidException;
 import in.siva.service.TransactionManagement;
 
 import in.siva.util.NumberValidator;
@@ -29,9 +29,7 @@ public class TransferServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			HttpSession session = request.getSession();
-
-			int accno = (Integer) session.getAttribute("ACCOUNTNUMBER");
+			
 			String senderAccNo = request.getParameter("accno1");
 			String receiverAccNo = request.getParameter("accno2");
 			String price = request.getParameter("amount");
@@ -44,15 +42,15 @@ public class TransferServlet extends HttpServlet {
 			TransactionManagement.transferAmount(fromAccNo, toAccNo, amount);
 			double balance = TransactionManagement.withdrawAmount(fromAccNo, amount);
 
-			if (accno == fromAccNo) {
+			if (balance > 0) {
 				String message = "Transfer Fund Success";
-				response.sendRedirect("summary.jsp?Balance=" + balance + "&infomessage=" + message);
+				response.sendRedirect("summary.jsp?Balance=" + balance + "&infoMessage=" + message);
 			} else {
 				String message = "Transfer Fund Failure";
 				response.sendRedirect("transferamount.jsp?errorMessage=" + message);
 			}
 
-		} catch (IOException e) {
+		} catch (ValidException e) {
 
 			String message = "Transfer Fund Failure";
 			response.sendRedirect("transferamount.jsp?errorMessage=" + message);

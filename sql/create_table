@@ -5,7 +5,8 @@ email varchar(40) not null,
 address varchar(100) not null,
 mobileno bigint not null,
 balance float not null,
-created_date Date not null,
+created_date timestamp not null,
+active boolean default true,
 accno serial primary key);
 
 insert into bank_userdetails(name,password,email,addres,mobileno,balance,created_date)

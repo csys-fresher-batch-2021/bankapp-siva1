@@ -32,31 +32,26 @@ public class DepositServlet extends HttpServlet {
 
 		try {
 			String price = request.getParameter("amount");
-			String accno = request.getParameter("accno");
+
 			HttpSession session = request.getSession();
-			
-			int accountNo = (Integer)session.getAttribute("ACCOUNTNUMBER"); 
+			int accountNo = (Integer) session.getAttribute("ACCOUNTNUMBER");
 			float amount = 0;
-			int accNo = 0;
-			accNo = NumberValidator.parseInteger(accno, "Invalid Account Number");
 			amount = NumberValidator.parseFloat(price, "Invalid amount");
 			double balance = TransactionManagement.depositAmount(accountNo, amount);
-			
-			
-			if (balance > 0 &&accountNo ==accNo) {
+
+			if (balance > 0) {
 
 				String message = "Deposit Success ";
 				response.sendRedirect("summary.jsp?Balance=" + balance + "&infoMessage=" + message);
-			} 
-			else
-			{
+			} else {
 				String message = "Deposit failed";
 				response.sendRedirect("deposit.jsp?errorMessage=" + message);
 			}
-		} catch (ValidException  e) {
+		} catch (ValidException e) {
+			e.printStackTrace();
 			String message = "Deposit failed";
 			response.sendRedirect("deposit.jsp?errorMessage=" + message);
-
+			
 		}
 
 	}

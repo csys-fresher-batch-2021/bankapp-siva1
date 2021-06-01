@@ -35,15 +35,12 @@ public class WithdrawServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			int accountNo = (Integer)session.getAttribute("ACCOUNTNUMBER");
-			String accno = request.getParameter("accno");
 			String price = request.getParameter("amount");
 			float amount = 0;
-			int accNo = 0;
-			accNo = NumberValidator.parseInteger(accno, "Invalid Account Number");
 			amount = NumberValidator.parseFloat(price, "Invalid amount");
 			double balance = TransactionManagement.withdrawAmount(accountNo, amount);
 					
-			if (balance > 0 && accountNo ==accNo) {
+			if (balance > 0) {
 
 				String message = "Withdraw Success ";
 				request.setAttribute(price, message);
