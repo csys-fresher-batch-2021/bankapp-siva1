@@ -44,7 +44,7 @@
 			}
 			else{
 				alert("Failed");
-			}
+			}window.location.href="display.jsp";
 		})
 	} 
 	function getAllDetails(){
@@ -54,8 +54,7 @@
 		
 		let user = res;		
 		let details = "";
-		
-			
+
 			details += "<tr><td>" +user.name+ "</td>"+
 			"<td>" + user.accNo + "</td>"+
 			"<td>" + user.email+"</td>"+
@@ -66,22 +65,26 @@
 			"<td>"+user.active+"</td>";
 			if(user.active){
 			details+="<td><button type ='button'class='btn btn-danger' onclick=updateAccountDetails(" + user.accNo + ",false) >DeActivate</button></td></tr>";
+			
 			details+="<tr><a href='deposit.jsp' class='btn btn-primary'>Deposit</a></tr>"+ "<tr><a href='withdraw.jsp' class='btn btn-primary'>Withdraw</a></tr>"+"<tr><a href='transferamount.jsp' class='btn btn-primary'>Transfer Amount</a></tr>"; 
 			
 			}
 			else{
-				details+="<td><button type ='button' class = 'btn btn-success'onclick=updateAccountDetails(" + user.accNo + ",true)>Activate</button></td></tr>";
+				details+="<td><button type ='button' class = 'btn btn-success' disabled onclick=updateAccountDetails(" + user.accNo + ",true)>Activate</button></td></tr>";
+				
+				
 			}
 
- 
+       
 		
 		
 		document.querySelector("#userlist").innerHTML = details;
 	})
-	
+
 	}
 getAllDetails();
 updateAccountDetails();	
+
 	</script>
 </body>
 </html>

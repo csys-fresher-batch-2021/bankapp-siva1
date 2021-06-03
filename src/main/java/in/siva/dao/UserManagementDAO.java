@@ -74,7 +74,6 @@ public class UserManagementDAO {
 		boolean register = false;
 		Connection connection = null;
 		PreparedStatement pst = null;
-
 		try {
 			// Get the connection
 			connection = ConnectionUtil.getConnection();

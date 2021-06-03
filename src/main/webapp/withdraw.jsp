@@ -17,12 +17,14 @@
 			</div>
 			<div class="mb-2 col-4">
 				<label>Enter Amount To Withdraw</label> <input type="number"
-					name="amount" id="amount" min="100" placeholder="Enter Amount Here"
-					class="form-control" required><br />
+					name="amount" id="amount" min="10" placeholder="Enter Amount Here"
+					class="form-control" required autofocus><br />
 				<div class="invalid-feedback">Please Enter an amount</div>
 			</div>
 			<div class="mb-2 col-4">
 				<button class="btn btn-primary">Withdraw</button>
+				<a href="display.jsp" class="btn btn-warning">Cancel</a>
+			
 			</div>
 
 		</form>

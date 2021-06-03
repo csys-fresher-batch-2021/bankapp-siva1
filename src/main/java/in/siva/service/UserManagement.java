@@ -2,11 +2,11 @@ package in.siva.service;
 
 import java.sql.SQLException;
 
-
 import in.siva.dao.UserManagementDAO;
 
 import in.siva.exception.ValidException;
 import in.siva.model.User;
+import in.siva.validator.ExistingDetailValidator;
 import in.siva.validator.UserValidation;
 
 public class UserManagement {
@@ -31,7 +31,7 @@ public class UserManagement {
 			try {
 				valid = userDAO.login(email, userPassword);
 			} catch (SQLException e) {
-				
+
 				e.printStackTrace();
 			}
 
@@ -47,8 +47,10 @@ public class UserManagement {
 	 * 
 	 * @param list //Details of user
 	 */
-	public static boolean registerDetails(User user) {
+	public static boolean registerDetails(User user) throws ValidException {
 		boolean register = false;
+
+		ExistingDetailValidator.isExistingDetails(user.getEmail(), user.getMobileNo());
 		// Condition for valid details
 		if (UserValidation.isValidUser(user)) {
 			try {
@@ -116,4 +118,5 @@ public class UserManagement {
 		}
 		return accNo;
 	}
+
 }

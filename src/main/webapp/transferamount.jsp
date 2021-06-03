@@ -17,18 +17,20 @@
 			</div>
 			<div class="mb-2 col-4">
 				<label>Receiver AccountNumber</label> <input type="number" name="accno2"
-					id="email2" placeholder="Enter AccountNumber" min="1"required><br />
+					id="email2" placeholder="Enter AccountNumber" min="1"required autofocus><br />
 				<div class="invalid-feedback">Please Enter Receiver Account Number</div>
 
 			</div>
 			<div class="mb-2 col-4">
 				<label>Enter Amount</label> <input type="number" name="amount"
-					id="amount" min = "1" required placeholder="Enter amount here"><br />
+					id="amount" min = "10" required placeholder="Enter amount here"><br />
 				<div class="invalid-feedback">Please Enter Amount</div>
 
 			</div>
 			<div class="mb-2 col-4">
 				<button class="btn btn-primary">Transfer Fund</button>
+				<a href="display.jsp" class="btn btn-warning">Cancel</a>
+			
 			</div>
 		</form>
 	</main>
