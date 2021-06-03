@@ -20,13 +20,14 @@
 			</div>
 			<div class="mb-2 col-4">
 				<label>Enter Amount To Deposit</label> <input type="number"
-					name="amount" id="amount" min="100" max="100000" class="form-control"
-					placeholder="Enter Amount Here" required autofocus><br />
+					name="amount" id="amount" min="10" max="100000" class="form-control"
+					placeholder="Enter Amount Here" required autofocus>
 				<div class="invalid-feedback">Please Enter an amount</div>
-
 			</div>
+			
 			<div class="mb-3 col-4">
 				<button class="btn btn-primary">Deposit</button>
+				<a href="display.jsp" class="btn btn-warning">Cancel</a>
 			</div>
 			<br />
 

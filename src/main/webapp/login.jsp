@@ -13,15 +13,14 @@
 			novalidate="novalidate" method="post">
 			<div class="mb-2 col-4">
 			<label>Email Id</label>
-			
 			<input type="email" name="email" id="email"placeholder="Enter Your Registered EmailId" class="form-control" required autofocus><br />
-			<div class="invalid-feedback">Please choose an Email.</div>
+			<div class="invalid-feedback">Please Enter an Email.</div>
 			</div>
 			<div class="mb-2 col-4">
 			<label>Password</label>
 			 
 			<input type="password" name="password"id="password" placeholder="Enter Your Password" class="form-control"required><br />
-			<div class="invalid-feedback">Please choose a password.</div>
+			<div class="invalid-feedback">Please Enter a password.</div>
 			</div>
 			<div class="mb-2 col-4">
 			<button class="btn btn-success">Submit</button> 

@@ -50,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
 			user.setBalance(amount);
 			user.setEmail(email);
 			user.setCreatedDate(date);
-
+			
 			boolean valid = UserManagement.registerDetails(user);// validating the details
 			// condition for valid details
 			if (valid) {
@@ -65,8 +65,7 @@ public class RegisterServlet extends HttpServlet {
 			}
 		} catch (ValidException e) {
 			e.printStackTrace();
-			String message = "!!Invalid Registration Credentials!!";
-			response.sendRedirect("registration.jsp?errorMessage=" + message);
+			response.sendRedirect("registration.jsp?errorMessage=" + e.getMessage());
 		}
 
 	}

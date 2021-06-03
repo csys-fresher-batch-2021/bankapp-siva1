@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <%
 String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");
+
 %>
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -27,21 +28,22 @@ String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");
       </li>
     </ul>
      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-     
+      
      <%if(loggedInUsername == null ){ %>
       <li class="nav-item active">
         <a class="nav-link" href="login.jsp">Login</a>
       </li>
-       
-      <li class="nav-item">
+      <li class="nav-item ">
+       <a class="nav-link" href="adminLogin.jsp">Admin</a>    
+       </li>
+        <li class="nav-item">
         <a class="nav-link" href="registration.jsp">Register</a>
-
       </li>
       <%} else { %>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="display.jsp">Accounts</a>
-      </li>
+     <% if(!loggedInUsername.equals("admin")){%>
+     <li class="nav-item">
+        <a class="nav-link" href="display.jsp">Account</a>
+      </li><%} %>
         <li class="nav-item">
         <a class="nav-link" href="#">Welcome <%=loggedInUsername %></a>
      	 </li>

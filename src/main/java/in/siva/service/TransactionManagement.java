@@ -95,6 +95,9 @@ public class TransactionManagement {
 			if (!transactionDAO.exists(receiverAccNo)) {
 				throw new ValidException("Invalid Receiver Account Number");
 			}
+			if(senderAccNo == receiverAccNo) {
+				throw new ValidException("Enter Receiver Account Number");
+			}
 			if (!transactionDAO.exists(senderAccNo)) {
 				throw new ValidException("Invalid Account Number");
 			}
