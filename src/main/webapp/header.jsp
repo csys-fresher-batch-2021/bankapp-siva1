@@ -35,7 +35,15 @@ String loggedInUsername = (String)session.getAttribute("LOGGED_IN_USER");
      <% if(!loggedInUsername.equals("admin")){%>
      <li class="nav-item">
         <a class="nav-link" href="display.jsp">Account</a>
-      </li><%} %>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="transactionsummary.jsp">Overall Statement</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="ministatement.jsp">MiniStatement</a>
+      </li>
+      
+      <%} %>
         <li class="nav-item">
         <a class="nav-link" href="#">Welcome <%=loggedInUsername %></a>
      	 </li>

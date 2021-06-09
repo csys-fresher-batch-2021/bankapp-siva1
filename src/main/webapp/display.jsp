@@ -49,7 +49,7 @@
 	} 
 	function getAllDetails(){
 	
-	let url = "DisplayServlet?userId=<%=(Integer)session.getAttribute("ACCOUNTNUMBER")%>";
+	let url = "DisplayServlet?userId=<%=(Integer) session.getAttribute("ACCOUNTNUMBER")%>";
 	fetch(url).then(res=>res.json()).then(res=>{
 		
 		let user = res;		
@@ -63,15 +63,19 @@
 			"<td>"+user.balance+"</td>"+
 			"<td>"+user.createdDate+"</td>";
 			if(user.active){
-			 details+="<td class='badge badge-pill badge-success'>"+" Active"+"</td>";}
+			 details+="<td class='badge badge-pill badge-success'>"+" Active"+"</td>";
+			 }
 			else{
 				details+="<td class='badge badge-pill badge-danger'>"+"Inactive"+"</td>";
 			}
 			if(user.active){
 			details+="<td><button type ='button'class='btn btn-danger' onclick=updateAccountDetails(" + user.accNo + ",false) >DeActivate</button></td></tr>";
 			
-			details+="<tr><td><a href='deposit.jsp' class='btn btn-warning'>Deposit</a></td>"+ "<td><a href='withdraw.jsp' class='btn btn-warning'>Withdraw</a></td>"+"<td><a href='transferamount.jsp' class='btn btn-warning'>Transfer Amount</a></td>"+"<td><a href='transactionsummary.jsp' class='btn btn-warning'>Summary</a></td></tr>"; 
-			
+			details+="<tr><td><a href='deposit.jsp' class='btn btn-warning'>Deposit</a></td>"
+			+ "<td><a href='withdraw.jsp' class='btn btn-warning'>Withdraw</a></td>"
+			+"<td><a href='transferamount.jsp' class='btn btn-warning'>Transfer Amount</a></td>"
+			+"<td><a href='transactionsummary.jsp' class='btn btn-warning'>Statement</a></td>"
+			+"<td><a href='ministatement.jsp' class='btn btn-warning'>MiniStatement</a></td></tr>";
 			}
 			else{
 				details+="<td><button type ='button' class = 'btn btn-success' disabled onclick=updateAccountDetails(" + user.accNo + ",true)>Activate</button></td></tr>";

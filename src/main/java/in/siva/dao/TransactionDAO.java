@@ -113,7 +113,7 @@ public class TransactionDAO {
 	 * @throws SQLException
 	 * @throws DBException
 	 */
-	public double fundTransfer(int fromAccNo, int toAccNo, float amount)
+	public synchronized double  fundTransfer(int fromAccNo, int toAccNo, float amount)
 			throws ClassNotFoundException, SQLException, DBException {
 		double balance = 0;
 		balance = withdraw(fromAccNo, amount);
@@ -211,7 +211,10 @@ public class TransactionDAO {
 		try {
 
 			connection = ConnectionUtil.getConnection();
-			String sql = "select bank.accno,bank.name,bank.balance,tr.amount,tr.comments,tr.transaction_type,tr.transaction_time from bank_userdetails bank,transaction_details tr where bank.accno=tr.accno and bank.accno=?";
+			String sql = "select bank.accno,bank.name,tr.amount,tr.comments,"
+					+ "tr.transaction_type,tr.transaction_time from bank_userdetails bank,"
+					+ "transaction_details tr where bank.accno=tr.accno and bank.accno=?"
+					+ " order by tr.transaction_time desc";
 			pst = connection.prepareStatement(sql);
 			pst.setInt(1, accno);
 			rs = pst.executeQuery();
@@ -221,11 +224,51 @@ public class TransactionDAO {
 				Transaction trans = new Transaction();
 				user.setAccNo(rs.getInt(1));
 				user.setName(rs.getString(2));
-				user.setBalance(rs.getFloat(3));
-				trans.setAmount(rs.getFloat(4));
-				trans.setComments(rs.getString(5));
-				trans.setTransactiontype(rs.getString(6));
-				Timestamp transTime = rs.getTimestamp(7);
+				trans.setAmount(rs.getFloat(3));
+				trans.setComments(rs.getString(4));
+				trans.setTransactiontype(rs.getString(5));
+				Timestamp transTime = rs.getTimestamp(6);
+				LocalDateTime transferTime = transTime.toLocalDateTime();
+				trans.setTransactionDate(transferTime);
+				trans.setUser(user);
+				list.add(trans);
+			}
+			return list;
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			throw new DBException("Invalid details");
+		} finally {
+			ConnectionUtil.close(rs, pst, connection);
+		}
+	}
+	public List<Transaction> miniStatement(int accno) throws ClassNotFoundException, SQLException {
+
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		List<Transaction> list = new ArrayList<>();
+
+		try {
+
+			connection = ConnectionUtil.getConnection();
+			String sql = "select bank.accno,bank.name,tr.amount,tr.comments,"
+					+ "tr.transaction_type,tr.transaction_time from bank_userdetails bank,"
+					+ "transaction_details tr where bank.accno=tr.accno and bank.accno=?"
+					+ " order by tr.transaction_time desc limit 5";
+			pst = connection.prepareStatement(sql);
+			pst.setInt(1, accno);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+
+				User user = new User();
+				Transaction trans = new Transaction();
+				user.setAccNo(rs.getInt(1));
+				user.setName(rs.getString(2));
+				trans.setAmount(rs.getFloat(3));
+				trans.setComments(rs.getString(4));
+				trans.setTransactiontype(rs.getString(5));
+				Timestamp transTime = rs.getTimestamp(6);
 				LocalDateTime transferTime = transTime.toLocalDateTime();
 				trans.setTransactionDate(transferTime);
 				trans.setUser(user);

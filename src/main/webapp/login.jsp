@@ -27,7 +27,7 @@
 			<button type = "reset" class="btn btn-warning">Reset</button>
 			</div>
 			<span style="color:pink">Don't have an Account?</span>
-			<a href = "registration.jsp" class='btn btn-info'>New User</a>
+			<a href = "registration.jsp" class='btn btn-info'>Sign Up</a>
 		</form>
 
 

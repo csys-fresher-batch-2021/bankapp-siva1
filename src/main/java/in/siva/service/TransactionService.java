@@ -140,5 +140,19 @@ public class TransactionService {
 		}
 		return display;
 	}
+	public static List<Transaction> statement(int accno) {
+		List<Transaction> display = null;
+		try {
+			if (UserValidation.isValidAccount(accno)) {
+				display = transactionDAO.miniStatement(accno);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
+			throw new ValidException("Unable to fetch details");
+
+		}
+		return display;
+	}
 
 }
