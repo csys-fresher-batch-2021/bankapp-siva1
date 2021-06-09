@@ -9,7 +9,7 @@
 	<jsp:include page="header.jsp"></jsp:include>
 
 	<h3>Welcome To Bank APP</h3>
-	<table class="table	table-bordered">
+	<table class="table table-dark table-borderless">
 		<caption>Users bank account details</caption>
 		<thead>
 			<tr>
@@ -21,7 +21,7 @@
 				<th scope="col">Balance</th>
 				<th scope="col">CreatedDate</th>
 				<th scope="col">AccountStatus</th>
-				<th scope="col">InactivateButton</th>
+				<th scope="col">Status Button</th>
 
 			</tr>
 
@@ -61,12 +61,16 @@
 			"<td>"+user.mobileNo+"</td>"+
 			"<td>"+user.address+"</td>"+
 			"<td>"+user.balance+"</td>"+
-			"<td>"+user.createdDate+"</td>"+
-			"<td>"+user.active+"</td>";
+			"<td>"+user.createdDate+"</td>";
+			if(user.active){
+			 details+="<td class='badge badge-pill badge-success'>"+" Active"+"</td>";}
+			else{
+				details+="<td class='badge badge-pill badge-danger'>"+"Inactive"+"</td>";
+			}
 			if(user.active){
 			details+="<td><button type ='button'class='btn btn-danger' onclick=updateAccountDetails(" + user.accNo + ",false) >DeActivate</button></td></tr>";
 			
-			details+="<tr><a href='deposit.jsp' class='btn btn-primary'>Deposit</a></tr>"+ "<tr><a href='withdraw.jsp' class='btn btn-primary'>Withdraw</a></tr>"+"<tr><a href='transferamount.jsp' class='btn btn-primary'>Transfer Amount</a></tr>"; 
+			details+="<tr><td><a href='deposit.jsp' class='btn btn-warning'>Deposit</a></td>"+ "<td><a href='withdraw.jsp' class='btn btn-warning'>Withdraw</a></td>"+"<td><a href='transferamount.jsp' class='btn btn-warning'>Transfer Amount</a></td>"+"<td><a href='transactionsummary.jsp' class='btn btn-warning'>Summary</a></td></tr>"; 
 			
 			}
 			else{
@@ -74,10 +78,6 @@
 				
 				
 			}
-
-       
-		
-		
 		document.querySelector("#userlist").innerHTML = details;
 	})
 

@@ -12,6 +12,6 @@ public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime> {
 
 	public JsonElement serialize(LocalDateTime localDate, Type type,
 			JsonSerializationContext jsonSerializationContext) {
-		return new JsonPrimitive(localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+		return new JsonPrimitive(localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
 	}
 }

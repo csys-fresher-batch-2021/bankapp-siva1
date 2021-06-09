@@ -1,7 +1,7 @@
 package in.siva.servlet;
 
 import java.io.IOException;
-
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import in.siva.exception.ValidException;
-
-import in.siva.service.TransactionManagement;
-
+import in.siva.model.Transaction;
+import in.siva.service.TransactionService;
 import in.siva.util.NumberValidator;
 
 /**
@@ -33,12 +32,17 @@ public class WithdrawServlet extends HttpServlet {
 
 		try {
 			HttpSession session = request.getSession();
-			
+			Transaction transaction = new Transaction();
 			int accountNo = (Integer)session.getAttribute("ACCOUNTNUMBER");
 			String price = request.getParameter("amount");
 			float amount = 0;
 			amount = NumberValidator.parseFloat(price, "Invalid amount");
-			double balance = TransactionManagement.withdrawAmount(accountNo, amount);
+			LocalDateTime withdrawTime = LocalDateTime.now();
+			transaction.setAmount(amount);
+			transaction.setTransactionDate(withdrawTime);
+			transaction.setTransactiontype("WITHDRAW");
+			transaction.setComments("TRANSACTION TRHOUGH ATM");
+			double balance = TransactionService.withdrawAmount(accountNo,transaction);
 					
 			if (balance > 0) {
 

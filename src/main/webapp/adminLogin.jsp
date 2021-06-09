@@ -24,10 +24,10 @@
 			<div class="invalid-feedback">Please Enter Password.</div>
 			</div>
 			<div class="mb-2 col-4">
-			<button class="btn btn-secondary" type="submit">Submit</button>
-			<button class="btn btn-danger" type="reset">Reset</button>
+			<button class="btn btn-primary" type="submit">Submit</button>
+			<button class="btn btn-warning" type="reset">Reset</button>
 			</div>
-			<p>Note:
+			<p style="color:pink">Note:
 			Admin=admin
 			password=Admin@123</p>
 		</form>

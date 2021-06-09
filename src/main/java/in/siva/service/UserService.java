@@ -6,12 +6,12 @@ import in.siva.dao.UserManagementDAO;
 
 import in.siva.exception.ValidException;
 import in.siva.model.User;
-import in.siva.validator.ExistingDetailValidator;
+import in.siva.util.ExistingDetailValidator;
 import in.siva.validator.UserValidation;
 
-public class UserManagement {
+public class UserService {
 
-	private UserManagement() {
+	private UserService() {
 		// Default Constructor
 	}
 

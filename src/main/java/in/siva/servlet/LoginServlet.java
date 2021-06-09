@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import in.siva.exception.ValidException;
-import in.siva.service.UserManagement;
+import in.siva.service.UserService;
 
 /**
  * Servlet implementation class LoginServlet
@@ -31,12 +31,12 @@ public class LoginServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 
-			boolean valid = UserManagement.loginValidation(email, password);// Validating the UserName and Password
+			boolean valid = UserService.loginValidation(email, password);// Validating the UserName and Password
 			// Condition for valid Login
 			if (valid) {
 				HttpSession session = request.getSession(); // Creating a Session
 				session.setAttribute("LOGGED_IN_USER", email);
-				int accNo = UserManagement.getAccNo(email);
+				int accNo = UserService.getAccNo(email);
 				session.setAttribute("ACCOUNTNUMBER", accNo);
 				// Setting username in session
 				String message = "Successfully logged in";

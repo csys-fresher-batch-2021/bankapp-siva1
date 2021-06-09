@@ -28,8 +28,8 @@
 
 			</div>
 			<div class="mb-2 col-4">
-				<button class="btn btn-primary">Transfer Fund</button>
-				<a href="display.jsp" class="btn btn-warning">Cancel</a>
+				<button class="btn btn-info">Transfer</button>
+				<a href="display.jsp" class="btn btn-danger">Cancel</a>
 			
 			</div>
 		</form>

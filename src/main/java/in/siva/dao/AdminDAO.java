@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.siva.connectionutil.ConnectionUtil;
 import in.siva.exception.DBException;
 import in.siva.model.User;
+import in.siva.util.ConnectionUtil;
 
 public class AdminDAO {
 
@@ -26,7 +26,7 @@ public class AdminDAO {
 		return instance;
 	}
 
-	public boolean adminLogin(String userName, String password) {
+	public boolean adminLogin(String userName, String password) throws DBException {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -52,7 +52,7 @@ public class AdminDAO {
 
 	}
 
-	public List<User> getAllUsers() {
+	public List<User> getAllUsers() throws DBException {
 
 		Connection connection = null;
 		PreparedStatement pst = null;

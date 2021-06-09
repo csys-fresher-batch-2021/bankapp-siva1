@@ -14,7 +14,7 @@
 			id="accno" oninput="filterAccNo()" min="1"
 			placeholder="Account Number">
 	</div>
-	<table class="table	table-bordered">
+	<table class="table table-dark table-borderless">
 		<caption>Users bank account details</caption>
 		<thead>
 			<tr>
@@ -76,8 +76,13 @@
 			"<td>"+user.mobileNo+"</td>"+
 			"<td>"+user.address+"</td>"+
 			"<td>"+user.balance+"</td>"+
-			"<td>"+user.createdDate+"</td>"+
-			"<td>"+user.active+"</td>";
+			"<td>"+user.createdDate+"</td>";
+			if(user.active){
+				details+="<td class='badge badge-pill badge-success'>"+"Active"+"</td>";
+			}
+			else{
+				details+="<td class='badge badge-pill badge-danger'>"+"Inactive"+"</td>";
+			}
 			if(user.active){
 			details+="<td><button type ='button'class='btn btn-danger' onclick=updateStatus(" + user.accNo + ",false) >DeActivate</button></td></tr>";
 			

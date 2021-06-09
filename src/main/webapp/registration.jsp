@@ -33,14 +33,16 @@
 			</div>
 			<div class="mb-2 col-4">
 			<label>Password</label>
-			<input type="password" id="userpassword" name="userpassword" placeholder="Enter Password" class="form-control" required><p>Password should include 8 character with at least one uppercase,special character and numerical<br />
+			<input type="password" id="userpassword" name="userpassword" placeholder="Enter Password" class="form-control" required>
+			<p style="color:pink">Password should include 8 character with at least one uppercase,special character and numerical</p><br />
 			<div class="invalid-feedback">Please Enter a Password.</div>
 			</div>
-			<label>Gender  </label>
-			<input type="radio" name="gender" id="gender" value="M">Male
-			<input type="radio" name="gender" id="gender" value="F">Female <br />
+			<label>Gender</label>
+			<input type="radio" name="gender" id="gender" value="M"><span style="color:pink">Male</span>
+			
+			<input type="radio" name="gender" id="gender" value="F"><span style="color:pink">Female</span> <br />
 
-			<p><strong>Deposit an Initial Amount at least "Rs.1000" to Open Your new SB Account</strong></p>
+			<p style="color:pink"><strong>Deposit an Initial Amount at least "Rs.1000" to Open Your new SB Account</strong></p>
 			<div class="mb-2 col-4">
 			<label>Initial Amount</label>
 			<input type="number" name="amount" id="amount" min="1000" required class="form-control" placeholder="Enter Initial Amount"><br />

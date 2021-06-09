@@ -1,6 +1,7 @@
 package in.siva.servlet;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import in.siva.exception.ValidException;
-
-import in.siva.service.TransactionManagement;
-
+import in.siva.model.Transaction;
+import in.siva.service.TransactionService;
 import in.siva.util.NumberValidator;
 
 /**
@@ -34,12 +34,17 @@ public class DepositServlet extends HttpServlet {
 
 		try {
 			String price = request.getParameter("amount");
-
+			Transaction transaction = new Transaction();
 			HttpSession session = request.getSession();
 			int accountNo = (Integer) session.getAttribute("ACCOUNTNUMBER");
 			float amount = 0;
 			amount = NumberValidator.parseFloat(price, "Invalid amount");
-			double balance = TransactionManagement.depositAmount(accountNo, amount);
+			LocalDateTime depositTime = LocalDateTime.now();
+			transaction.setAmount(amount);
+			transaction.setTransactionDate(depositTime);
+			transaction.setTransactiontype("DEPOSIT");
+			transaction.setComments("TRANSACTION TRHOUGH UPI");
+			double balance = TransactionService.depositAmount(accountNo, transaction);
 
 			if (balance > 0) {
 

@@ -26,8 +26,8 @@
 			</div>
 			
 			<div class="mb-3 col-4">
-				<button class="btn btn-primary">Deposit</button>
-				<a href="display.jsp" class="btn btn-warning">Cancel</a>
+				<button class="btn btn-info">Deposit</button>
+				<a href="display.jsp" class="btn btn-danger">Cancel</a>
 			</div>
 			<br />
 
