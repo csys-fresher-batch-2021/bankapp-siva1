@@ -65,7 +65,7 @@ public class TransactionService {
 		try {
 
 			if (!UserValidation.isValidAmount(transaction.getAmount())) {
-				throw new ValidException("Invalid Amount");
+				throw new ValidException("Amount Invalid");
 			}
 			if (AmountValidator.isSufficientAmount(accNo, transaction.getAmount())) {
 				throw new ValidException("InSufficient Balance in Your Account!");
@@ -83,6 +83,14 @@ public class TransactionService {
 		return balance;
 	}
 
+	/**
+	 * This method transfers amount to another user account
+	 * 
+	 * @param senderAccNo
+	 * @param receiverAccNo
+	 * @param transfer
+	 * @return
+	 */
 	public static double transferAmount(int senderAccNo, int receiverAccNo, Transaction transfer) {
 		double balance = 0;
 		try {
@@ -112,13 +120,6 @@ public class TransactionService {
 		return balance;
 	}
 
-//	public static void trasaction(int accno, Transaction transfer) {
-//		try {
-//			transactionDAO.transactionDetails(accno, transfer);
-//		} catch (SQLException | ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//	}
 	/**
 	 * This method gives the bank statement of the user
 	 * 
