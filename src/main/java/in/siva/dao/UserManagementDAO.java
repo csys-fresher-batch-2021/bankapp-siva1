@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import in.siva.connectionutil.ConnectionUtil;
 import in.siva.exception.DBException;
 
 import in.siva.model.User;
+import in.siva.util.ConnectionUtil;
 
 public class UserManagementDAO {
 
@@ -32,9 +32,10 @@ public class UserManagementDAO {
 	 * @param userPassword //password given by the user
 	 * @return
 	 * @throws SQLException
+	 * @throws DBException 
 	 */
 
-	public boolean login(String email, String password) throws SQLException {
+	public boolean login(String email, String password) throws SQLException, DBException {
 		PreparedStatement pst = null;
 		Connection connection = null;
 		ResultSet rs = null;
@@ -67,9 +68,10 @@ public class UserManagementDAO {
 	 * 
 	 * @param list //Details of user
 	 * @throws SQLException
+	 * @throws DBException 
 	 */
 
-	public boolean register(User user) throws SQLException {
+	public boolean register(User user) throws SQLException, DBException {
 
 		boolean register = false;
 		Connection connection = null;
@@ -112,9 +114,10 @@ public class UserManagementDAO {
 	 * 
 	 * @param name //name of user
 	 * @return
+	 * @throws DBException 
 	 */
 
-	public User getUsers(int accNo) throws ClassNotFoundException, SQLException {
+	public User getUsers(int accNo) throws ClassNotFoundException, SQLException, DBException {
 		User user = null;
 
 		Connection connection = null;
@@ -158,7 +161,7 @@ public class UserManagementDAO {
 
 	}
 
-	public void status(int accNo, boolean status) {
+	public void status(int accNo, boolean status) throws DBException {
 
 		Connection connection = null;
 		PreparedStatement pst = null;
@@ -179,7 +182,7 @@ public class UserManagementDAO {
 		}
 	}
 
-	public int getAccountNo(String email) throws ClassNotFoundException, SQLException {
+	public int getAccountNo(String email) throws ClassNotFoundException, SQLException, DBException {
 
 		Connection connection = null;
 		PreparedStatement pst = null;

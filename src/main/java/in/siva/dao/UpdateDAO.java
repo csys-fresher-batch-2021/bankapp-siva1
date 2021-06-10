@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import in.siva.connectionutil.ConnectionUtil;
+import in.siva.util.ConnectionUtil;
 
 public class UpdateDAO {
 

@@ -22,8 +22,8 @@
 				<div class="invalid-feedback">Please Enter an amount</div>
 			</div>
 			<div class="mb-2 col-4">
-				<button class="btn btn-primary">Withdraw</button>
-				<a href="display.jsp" class="btn btn-warning">Cancel</a>
+				<button class="btn btn-info">Withdraw</button>
+				<a href="display.jsp" class="btn btn-danger">Cancel</a>
 			
 			</div>
 

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import in.siva.exception.ValidException;
 import in.siva.model.User;
-import in.siva.service.UserManagement;
+import in.siva.service.UserService;
 import in.siva.util.NumberValidator;
 
 /**
@@ -51,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
 			user.setEmail(email);
 			user.setCreatedDate(date);
 			
-			boolean valid = UserManagement.registerDetails(user);// validating the details
+			boolean valid = UserService.registerDetails(user);// validating the details
 			// condition for valid details
 			if (valid) {
 

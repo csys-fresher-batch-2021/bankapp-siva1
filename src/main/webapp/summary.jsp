@@ -11,7 +11,7 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>Transaction Summary</h3>
-		<table class="table	table-bordered">
+		<table class="table table-dark table-borderless">
 			<caption>Transaction Summary</caption>
 			<thead>
 				<tr>

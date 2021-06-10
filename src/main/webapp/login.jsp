@@ -24,7 +24,10 @@
 			</div>
 			<div class="mb-2 col-4">
 			<button class="btn btn-success">Submit</button> 
+			<button type = "reset" class="btn btn-warning">Reset</button>
 			</div>
+			<span style="color:pink">Don't have an Account?</span>
+			<a href = "registration.jsp" class='btn btn-info'>Sign Up</a>
 		</form>
 
 

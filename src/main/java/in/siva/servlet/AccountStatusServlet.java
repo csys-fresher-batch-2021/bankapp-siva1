@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import in.siva.service.UserManagement;
+import in.siva.service.UserService;
 import in.siva.util.NumberValidator;
 
 /**
@@ -31,7 +31,7 @@ public class AccountStatusServlet extends HttpServlet {
 		boolean status = Boolean.parseBoolean(request.getParameter("status"));
 		int accno = 0;
 		accno = NumberValidator.parseInteger(accNo, "Invalid Account Number");
-		boolean isValid = UserManagement.accountStatus(accno,status);
+		boolean isValid = UserService.accountStatus(accno,status);
 		PrintWriter out = response.getWriter();
 		out.print(isValid);
 		out.flush();

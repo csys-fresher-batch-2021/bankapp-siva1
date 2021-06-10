@@ -1,4 +1,4 @@
-package in.siva.connectionutil;
+package in.siva.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +15,6 @@ public class ConnectionUtil {
 	private static final String URL = System.getenv("spring.datasource.url");
 	private static final String USERNAME = System.getenv("spring.datasource.username");
 	private static final String PASSWORD = System.getenv("spring.datasource.password");
-
 
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 

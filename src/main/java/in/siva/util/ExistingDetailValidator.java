@@ -1,4 +1,4 @@
-package in.siva.validator;
+package in.siva.util;
 
 import java.util.List;
 
