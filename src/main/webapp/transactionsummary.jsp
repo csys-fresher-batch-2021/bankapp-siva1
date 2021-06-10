@@ -29,6 +29,10 @@
 
 	</table>
 	<script>
+	function filter(){
+		
+	}
+	
 	function getTransactionDetails(){
 	let url = "TransactionSummaryServlet?userId=<%=(Integer)session.getAttribute("ACCOUNTNUMBER")%>";
 	fetch(url).then(res=>res.json()).then(res=>{
@@ -36,6 +40,10 @@
 		let transfer = res;
 		console.log(transfer);
 		let summary = "";
+			if(transfer==0){
+				summary+="<tr><td colspan=14 class='text-center'>"+
+							"No Transactions Yet"+"</td></tr>";
+			}
 	    	for(let trans of transfer){
 			summary+= "<tr><td>" +trans.user.name+ "</td>"+
 			"<td>" +trans.user.accNo+ "</td>"+
