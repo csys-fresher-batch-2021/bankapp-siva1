@@ -1,3 +1,4 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalTime"%>
 <%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -25,6 +26,8 @@
 					String result = request.getParameter("infoMessage");
 					LocalDate date = LocalDate.now();
 					LocalTime time = LocalTime.now();
+					 DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+					 String text = date.format(formatters);
 					%>
 				
 			<tbody>
@@ -38,7 +41,7 @@
 				</tr>
 				<tr>
 					<td>Transaction Date</td>
-					<td><%=date%></td>
+					<td><%=text%></td>
 				</tr>
 				<tr>
 					<td>Transaction Time</td>
