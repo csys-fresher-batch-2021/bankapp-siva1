@@ -220,8 +220,8 @@ public class TransactionDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 
-				Transaction trans = statement(rs);
-				list.add(trans);
+				Transaction transaction = statement(rs);
+				list.add(transaction);
 			}
 			return list;
 
@@ -267,8 +267,8 @@ public class TransactionDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 
-				Transaction trans = statement(rs);
-				list.add(trans);
+				Transaction transfer = statement(rs);
+				list.add(transfer);
 			}
 			return list;
 
