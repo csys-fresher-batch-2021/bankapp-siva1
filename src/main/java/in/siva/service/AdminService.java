@@ -15,11 +15,18 @@ public class AdminService {
 
 	private static AdminDAO adminDAO = new AdminDAO();
 
+	/**
+	 * Login for Admin
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	public static boolean checkAdminLogin(String username, String password) {
 
 		boolean valid = false;
 		try {
-			if (UserValidation.nameValidation(username)&&UserValidation.passwordValidation(password)) {
+			if (UserValidation.nameValidation(username) && UserValidation.passwordValidation(password)) {
 				valid = adminDAO.adminLogin(username, password);
 			}
 			return valid;
@@ -28,6 +35,11 @@ public class AdminService {
 		}
 	}
 
+	/**
+	 * This method shows all User details for Admin
+	 * 
+	 * @return
+	 */
 	public static List<User> getAllUser() {
 		List<User> userList = null;
 		try {

@@ -8,7 +8,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 
-	<h3>Welcome To Bank APP</h3>
+	<h3>Last Few Transactions</h3>
 	<table class="table table-dark table-borderless">
 		<caption>Your Last Transaction details</caption>
 		<thead>
@@ -41,13 +41,13 @@
 						"No Transactions Yet"+"</td></tr>";
 		}
     	
-	    	for(let trans of transaction){
-			statement += "<tr><td>" +trans.user.name+ "</td>"+
-			"<td>" +trans.user.accNo+ "</td>"+
-			"<td>" + trans.transactionType+"</td>"+
-			"<td>"+ trans.amount+"</td>"+
-			"<td>"+trans.comments+"</td>"+
-			 "<td>"+trans.transactionDateTime+"</td></tr>";
+	    	for(let transfer of transaction){
+			statement += "<tr><td>" +transfer.user.name+ "</td>"+
+			"<td>" +transfer.user.accNo+ "</td>"+
+			"<td>" + transfer.transactionType+"</td>"+
+			"<td>"+ transfer.amount+"</td>"+
+			"<td>"+transfer.comments+"</td>"+
+			 "<td>"+transfer.transactionDateTime+"</td></tr>";
 			
 	    	}
 			document.querySelector("#ministatement").innerHTML = statement;

@@ -16,6 +16,8 @@ public class TransactionService {
 	private TransactionService() {
 		// Default Constructor
 	}
+	private static TransactionDAO transactionDAO = new TransactionDAO();
+	private static UpdateDAO updateDAO = new UpdateDAO();
 
 	/**
 	 * Deposit an Amount for User account
@@ -23,9 +25,7 @@ public class TransactionService {
 	 * @param name   // name of user
 	 * @param amount // amount to deposit
 	 */
-	private static TransactionDAO transactionDAO = new TransactionDAO();
-	private static UpdateDAO updateDAO = new UpdateDAO();
-
+	
 	public static double depositAmount(int accNo, Transaction transaction) {
 		double balance = 0;
 
@@ -140,6 +140,11 @@ public class TransactionService {
 		}
 		return display;
 	}
+	/**
+	 * This method shows the last few transactions of the User
+	 * @param accno
+	 * @return
+	 */
 	public static List<Transaction> statement(int accno) {
 		List<Transaction> display = null;
 		try {

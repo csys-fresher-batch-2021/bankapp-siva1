@@ -8,14 +8,14 @@
 <body onload="filter()">
 	<jsp:include page="header.jsp"></jsp:include>
 
-	<h3>Welcome To Bank APP</h3>
-			<select id="type" name="type" onchange="filter()">
-			<option  value="" selected>All</option>
-			<option value="CREDITED">Credited</option>
-			<option value="DEBITED">Debited</option>
-			<option value="TRANSFER">Transfer</option>
-			</select>
-	
+	<h3>Your Transaction History</h3>
+	<select id="type" name="type" onchange="filter()">
+		<option value="" selected>All</option>
+		<option value="CREDITED">Credited</option>
+		<option value="DEBITED">Debited</option>
+		<option value="TRANSFER">Transfer</option>
+	</select>
+
 	<table class="table table-dark table-borderless">
 		<caption>Your Last Transaction details</caption>
 		<thead>
@@ -26,7 +26,7 @@
 				<th scope="col">Amount</th>
 				<th scope="col">Comments</th>
 				<th scope="col">TransactionDate</th>
-				
+
 			</tr>
 
 		</thead>
@@ -38,7 +38,7 @@
 	<script>
 	function filter(){
 		event.preventDefault();
-		let url = "TransactionSummaryServlet?userId=<%=(Integer)session.getAttribute("ACCOUNTNUMBER")%>";
+		let url = "TransactionSummaryServlet?userId=<%=(Integer) session.getAttribute("ACCOUNTNUMBER")%>";
 		fetch(url).then(res=>res.json()).then(res=>{
 			let transactionType = document.querySelector("#type").value;
 			console.log(transactionType);
@@ -60,13 +60,13 @@
 				summary+="<tr><td colspan=14 class='text-center'>"+
 							"No Transactions Yet"+"</td></tr>";
 			}
-	    	for(let trans of transfer){
-			summary+= "<tr><td>" +trans.user.name+ "</td>"+
-			"<td>" +trans.user.accNo+ "</td>"+
-			"<td>" + trans.transactionType+"</td>"+
-			"<td>"+ trans.amount+"</td>"+
-			"<td>"+trans.comments+"</td>"+
-			 "<td>"+trans.transactionDateTime+"</td></tr>";
+	    	for(let transaction of transfer){
+			summary+= "<tr><td>" +transaction.user.name+ "</td>"+
+			"<td>" +transaction.user.accNo+ "</td>"+
+			"<td>" + transaction.transactionType+"</td>"+
+			"<td>"+ transaction.amount+"</td>"+
+			"<td>"+transaction.comments+"</td>"+
+			 "<td>"+transaction.transactionDateTime+"</td></tr>";
 			
 	    	}
 			document.querySelector("#transactionlist").innerHTML = summary;
