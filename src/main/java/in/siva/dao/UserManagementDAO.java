@@ -26,13 +26,13 @@ public class UserManagementDAO {
 	}
 
 	/**
-	 * Validation for Login
+	 * Login for User
 	 * 
 	 * @param userName     // name of the user
 	 * @param userPassword //password given by the user
 	 * @return
 	 * @throws SQLException
-	 * @throws DBException 
+	 * @throws DBException
 	 */
 
 	public boolean login(String email, String password) throws SQLException, DBException {
@@ -68,7 +68,7 @@ public class UserManagementDAO {
 	 * 
 	 * @param list //Details of user
 	 * @throws SQLException
-	 * @throws DBException 
+	 * @throws DBException
 	 */
 
 	public boolean register(User user) throws SQLException, DBException {
@@ -114,7 +114,7 @@ public class UserManagementDAO {
 	 * 
 	 * @param name //name of user
 	 * @return
-	 * @throws DBException 
+	 * @throws DBException
 	 */
 
 	public User getUsers(int accNo) throws ClassNotFoundException, SQLException, DBException {

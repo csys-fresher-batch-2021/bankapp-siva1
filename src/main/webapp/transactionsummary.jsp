@@ -52,10 +52,8 @@
 		
 	}
 	
-	function getTransactionDetails(statement){
-	//fetch(url).then(res=>res.json()).then(res=>{
-		
-		let transfer = statement;
+	function getTransactionDetails(statement){	
+ 		let transfer = statement;
 		console.log(transfer);
 		let summary = "";
 			if(transfer==0){
@@ -72,10 +70,7 @@
 			
 	    	}
 			document.querySelector("#transactionlist").innerHTML = summary;
-			
-	
 	}
-//getTransactionDetails();
 		
 		</script>
 </body>

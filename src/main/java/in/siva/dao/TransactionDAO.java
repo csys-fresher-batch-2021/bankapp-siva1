@@ -113,7 +113,7 @@ public class TransactionDAO {
 	 * @throws SQLException
 	 * @throws DBException
 	 */
-	public synchronized double  fundTransfer(int fromAccNo, int toAccNo, float amount)
+	public synchronized double fundTransfer(int fromAccNo, int toAccNo, float amount)
 			throws ClassNotFoundException, SQLException, DBException {
 		double balance = 0;
 		balance = withdraw(fromAccNo, amount);
@@ -220,7 +220,7 @@ public class TransactionDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 
-				Transaction trans = limitedStatement(rs);
+				Transaction trans = statement(rs);
 				list.add(trans);
 			}
 			return list;
@@ -233,7 +233,7 @@ public class TransactionDAO {
 		}
 	}
 
-	private Transaction limitedStatement(ResultSet rs) throws SQLException {
+	private Transaction statement(ResultSet rs) throws SQLException {
 		User user = new User();
 		Transaction trans = new Transaction();
 		user.setAccNo(rs.getInt(1));
@@ -247,6 +247,7 @@ public class TransactionDAO {
 		trans.setUser(user);
 		return trans;
 	}
+
 	public List<Transaction> miniStatement(int accno) throws ClassNotFoundException, SQLException {
 
 		Connection connection = null;
@@ -266,7 +267,7 @@ public class TransactionDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 
-				Transaction trans = limitedStatement(rs);
+				Transaction trans = statement(rs);
 				list.add(trans);
 			}
 			return list;
