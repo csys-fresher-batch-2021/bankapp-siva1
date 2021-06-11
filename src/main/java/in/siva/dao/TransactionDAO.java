@@ -113,7 +113,7 @@ public class TransactionDAO {
 	 * @throws SQLException
 	 * @throws DBException
 	 */
-	public synchronized double  fundTransfer(int fromAccNo, int toAccNo, float amount)
+	public synchronized double fundTransfer(int fromAccNo, int toAccNo, float amount)
 			throws ClassNotFoundException, SQLException, DBException {
 		double balance = 0;
 		balance = withdraw(fromAccNo, amount);
@@ -220,18 +220,8 @@ public class TransactionDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 
-				User user = new User();
-				Transaction trans = new Transaction();
-				user.setAccNo(rs.getInt(1));
-				user.setName(rs.getString(2));
-				trans.setAmount(rs.getFloat(3));
-				trans.setComments(rs.getString(4));
-				trans.setTransactiontype(rs.getString(5));
-				Timestamp transTime = rs.getTimestamp(6);
-				LocalDateTime transferTime = transTime.toLocalDateTime();
-				trans.setTransactionDate(transferTime);
-				trans.setUser(user);
-				list.add(trans);
+				Transaction transaction = statement(rs);
+				list.add(transaction);
 			}
 			return list;
 
@@ -242,6 +232,22 @@ public class TransactionDAO {
 			ConnectionUtil.close(rs, pst, connection);
 		}
 	}
+
+	private Transaction statement(ResultSet rs) throws SQLException {
+		User user = new User();
+		Transaction trans = new Transaction();
+		user.setAccNo(rs.getInt(1));
+		user.setName(rs.getString(2));
+		trans.setAmount(rs.getFloat(3));
+		trans.setComments(rs.getString(4));
+		trans.setTransactiontype(rs.getString(5));
+		Timestamp transTime = rs.getTimestamp(6);
+		LocalDateTime transferTime = transTime.toLocalDateTime();
+		trans.setTransactionDate(transferTime);
+		trans.setUser(user);
+		return trans;
+	}
+
 	public List<Transaction> miniStatement(int accno) throws ClassNotFoundException, SQLException {
 
 		Connection connection = null;
@@ -261,18 +267,8 @@ public class TransactionDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 
-				User user = new User();
-				Transaction trans = new Transaction();
-				user.setAccNo(rs.getInt(1));
-				user.setName(rs.getString(2));
-				trans.setAmount(rs.getFloat(3));
-				trans.setComments(rs.getString(4));
-				trans.setTransactiontype(rs.getString(5));
-				Timestamp transTime = rs.getTimestamp(6);
-				LocalDateTime transferTime = transTime.toLocalDateTime();
-				trans.setTransactionDate(transferTime);
-				trans.setUser(user);
-				list.add(trans);
+				Transaction transfer = statement(rs);
+				list.add(transfer);
 			}
 			return list;
 

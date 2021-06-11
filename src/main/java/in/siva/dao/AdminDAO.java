@@ -26,6 +26,14 @@ public class AdminDAO {
 		return instance;
 	}
 
+	/**
+	 * Login method for admin
+	 * 
+	 * @param userName
+	 * @param password
+	 * @return
+	 * @throws DBException
+	 */
 	public boolean adminLogin(String userName, String password) throws DBException {
 		Connection connection = null;
 		PreparedStatement pst = null;
@@ -41,7 +49,8 @@ public class AdminDAO {
 			if (rs.next()) {
 				valid = true;
 
-			} return valid;
+			}
+			return valid;
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Invalid Login Credentials");
@@ -51,6 +60,13 @@ public class AdminDAO {
 		}
 
 	}
+
+	/**
+	 * This method shows all the users detail for admin
+	 * 
+	 * @return
+	 * @throws DBException
+	 */
 
 	public List<User> getAllUsers() throws DBException {
 

@@ -15,6 +15,8 @@ public class UserService {
 		// Default Constructor
 	}
 
+	private static UserManagementDAO userDAO = new UserManagementDAO();
+
 	/**
 	 * Validation for Login
 	 * 
@@ -22,7 +24,6 @@ public class UserService {
 	 * @param userPassword //password given by the user
 	 * @return
 	 */
-	private static UserManagementDAO userDAO = new UserManagementDAO();
 
 	public static boolean loginValidation(String email, String userPassword) {
 		boolean valid = false;
@@ -88,6 +89,13 @@ public class UserService {
 		return display;
 	}
 
+	/**
+	 * This method shows whether the account is active or not
+	 * 
+	 * @param accno
+	 * @param status
+	 * @return
+	 */
 	public static boolean accountStatus(int accno, boolean status) {
 		boolean isValid = false;
 
@@ -105,6 +113,12 @@ public class UserService {
 		return isValid;
 	}
 
+	/**
+	 * This method gets the Account Number of the user
+	 * 
+	 * @param email
+	 * @return
+	 */
 	public static int getAccNo(String email) {
 		int accNo = 0;
 		try {

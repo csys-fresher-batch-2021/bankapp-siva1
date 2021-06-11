@@ -40,7 +40,7 @@ public class WithdrawServlet extends HttpServlet {
 			LocalDateTime withdrawTime = LocalDateTime.now();
 			transaction.setAmount(amount);
 			transaction.setTransactionDate(withdrawTime);
-			transaction.setTransactiontype("WITHDRAW");
+			transaction.setTransactiontype("DEBITED");
 			transaction.setComments("TRANSACTION TRHOUGH ATM");
 			double balance = TransactionService.withdrawAmount(accountNo,transaction);
 					

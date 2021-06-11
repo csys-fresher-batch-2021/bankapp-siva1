@@ -8,7 +8,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 
-	<h3>Welcome To Bank APP</h3>
+	<h3>Account Details</h3>
 	<table class="table table-dark table-borderless">
 		<caption>Users bank account details</caption>
 		<thead>

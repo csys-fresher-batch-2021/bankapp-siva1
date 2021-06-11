@@ -42,7 +42,7 @@ public class DepositServlet extends HttpServlet {
 			LocalDateTime depositTime = LocalDateTime.now();
 			transaction.setAmount(amount);
 			transaction.setTransactionDate(depositTime);
-			transaction.setTransactiontype("DEPOSIT");
+			transaction.setTransactiontype("CREDITED");
 			transaction.setComments("TRANSACTION TRHOUGH UPI");
 			double balance = TransactionService.depositAmount(accountNo, transaction);
 
